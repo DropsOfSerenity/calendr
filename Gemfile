@@ -27,6 +27,10 @@ gem 'rails-assets-angular-ui-router'
 gem 'rails-assets-angular-animate'
 gem 'rails-assets-angular-devise'
 gem 'rails-assets-lodash'
+gem 'rails-assets-hammerjs'
+gem 'rails-assets-angular-aria'
+gem 'rails-assets-moment'
+gem 'rails-assets-angular-material', '0.7.0.rc3'
 
 group :development, :test do
   gem 'web-console'

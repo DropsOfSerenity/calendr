@@ -5,5 +5,9 @@
 #= require angular-animate
 #= require angular-ui-router
 #= require angular-rails-templates
+#= require hammerjs
+#= require moment
+#= require angular-aria
+#= require angular-material
 #= require_tree .
 #= require_tree ../templates
