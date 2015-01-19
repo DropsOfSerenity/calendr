@@ -118,6 +118,11 @@ GEM
     rails-assets-angular-ui-router (0.2.13)
       rails-assets-angular (>= 1.0.8)
     rails-assets-lodash (2.4.1)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.3)
+    rails_stdout_logging (0.0.3)
     railties (4.1.8)
       actionpack (= 4.1.8)
       activesupport (= 4.1.8)
@@ -211,6 +216,8 @@ DEPENDENCIES
   rails-assets-angular-devise
   rails-assets-angular-ui-router
   rails-assets-lodash
+  rails_12factor
+  rails_serve_static_assets
   rspec-rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)

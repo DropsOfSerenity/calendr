@@ -37,6 +37,11 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
 end
+
+group :production do
+  gem 'rails_12factor'
+  gem 'rails_serve_static_assets'
+end
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
