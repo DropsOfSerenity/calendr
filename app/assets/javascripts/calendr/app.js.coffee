@@ -12,18 +12,27 @@ calendrConfig = (
 
     .state 'base',
       url: '/'
+      templateUrl: 'base.html'
+      controller: 'BaseCtrl as base'
+      abstract: true
+
+    .state 'base.planner-tabs',
+      url: 'planner'
       views: {
-        "@": {
-          templateUrl: 'base.html'
-          controller: 'BaseCtrl as base'
+        "": {
+          templateUrl: 'planner-tabs.html'
         }
-        "all@base": {
+        "all@base.planner-tabs": {
           templateUrl: 'all.html'
           controller: 'AllCtrl as all'
         }
       }
 
-  $urlRouterProvider.otherwise '/'
+    .state 'base.add-homework',
+      url: 'homework'
+      templateUrl: 'homework.html'
+
+  $urlRouterProvider.otherwise '/planner'
 
   # enable HTML5 Mode for SEO
   $locationProvider.html5Mode true
@@ -35,6 +44,7 @@ angular
     'templates',
     'ui.router',
     'ngAnimate',
+    'ngMessages',
     'ngAria',
     'ngMaterial'
   ]

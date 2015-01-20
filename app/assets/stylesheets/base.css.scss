@@ -20,11 +20,12 @@ md-tabs.schedulr-tabs md-tab-label {
 md-tabs.schedulr-tabs .active md-tab-label {
   color: #fff !important;
 }
-.schedulr-tabs.ng-hide {
-  max-height: 0px;
-  min-height: 0px;
-}
 .schedulr-tabs md-tab {
   background: #E0E0E0 !important;
   color: #616161;
+}
+
+.main-ui.ng-enter {
+  -webkit-animation: fadeInDown 1s;
+  animation: fadeInDown 1s;
 }

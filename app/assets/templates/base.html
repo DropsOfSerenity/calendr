@@ -2,22 +2,13 @@
   <md-toolbar md-scroll-shrink>
     <div class="md-toolbar-tools">
       <h3>
-        <span>Schedulr</span>
+        <a ui-sref="base.planner-tabs">Schedulr</a>
       </h3>
       <div class="md-tools">
-        <md-button>Add Homework</md-button>
+        <md-button ui-sref="base.add-homework">Add Homework</md-button>
       </div>
     </div>
   </md-toolbar>
-  <md-tabs class="schedulr-tabs" md-stretch-tabs="always" md-selected="data.selectedIndex">
-    <md-tab label="All">
-      <div ui-view="all"></div>
-    </md-tab>
-    <md-tab label="Priority">
-      <div ui-view="priority"></div>
-    </md-tab>
-    <md-tab label="Class">
-      <div ui-view="class"></div>
-    </md-tab>
-  </md-tabs>
+
+  <div class="main-ui" ui-view></div>
 </div>

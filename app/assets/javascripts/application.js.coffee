@@ -9,5 +9,6 @@
 #= require moment
 #= require angular-aria
 #= require angular-material
+#= require angular-messages
 #= require_tree .
 #= require_tree ../templates

@@ -108,9 +108,9 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.1.8)
       sprockets-rails (~> 2.0)
-    rails-assets-angular (1.3.9)
-    rails-assets-angular-animate (1.3.9)
-      rails-assets-angular (= 1.3.9)
+    rails-assets-angular (1.3.8)
+    rails-assets-angular-animate (1.3.8)
+      rails-assets-angular (= 1.3.8)
     rails-assets-angular-aria (1.3.9)
       rails-assets-angular (~> 1.3.0)
     rails-assets-angular-bootstrap (0.11.2)
@@ -122,8 +122,11 @@ GEM
       rails-assets-angular-animate (~> 1.3.0)
       rails-assets-angular-aria (~> 1.3.0)
       rails-assets-hammerjs (~> 2.0.2)
+    rails-assets-angular-messages (1.3.8)
+      rails-assets-angular (= 1.3.8)
     rails-assets-angular-ui-router (0.2.13)
       rails-assets-angular (>= 1.0.8)
+    rails-assets-animate.css (3.2.0)
     rails-assets-hammerjs (2.0.4)
     rails-assets-lodash (2.4.1)
     rails-assets-moment (2.9.0)
@@ -219,13 +222,15 @@ DEPENDENCIES
   pg
   rabl
   rails (= 4.1.8)
-  rails-assets-angular
-  rails-assets-angular-animate
+  rails-assets-angular (= 1.3.8)
+  rails-assets-angular-animate (= 1.3.8)
   rails-assets-angular-aria
   rails-assets-angular-bootstrap
   rails-assets-angular-devise
   rails-assets-angular-material (= 0.7.0.rc3)
+  rails-assets-angular-messages (= 1.3.8)
   rails-assets-angular-ui-router
+  rails-assets-animate.css
   rails-assets-hammerjs
   rails-assets-lodash
   rails-assets-moment

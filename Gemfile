@@ -21,11 +21,13 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 # rails assets
-gem 'rails-assets-angular'
+gem 'rails-assets-angular', '=1.3.8'
 gem 'rails-assets-angular-bootstrap'
+gem 'rails-assets-animate.css'
 gem 'rails-assets-angular-ui-router'
-gem 'rails-assets-angular-animate'
+gem 'rails-assets-angular-animate', '=1.3.8'
 gem 'rails-assets-angular-devise'
+gem 'rails-assets-angular-messages', '=1.3.8'
 gem 'rails-assets-lodash'
 gem 'rails-assets-hammerjs'
 gem 'rails-assets-angular-aria'
