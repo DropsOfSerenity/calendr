@@ -5,10 +5,6 @@ calendrConfig = (
     $mdThemingProvider
   ) ->
 
-  $mdThemingProvider.theme('default')
-    .primaryColor('deep-orange')
-    .accentColor('teal')
-
   $mdThemingProvider.theme('dark', 'default')
     .dark()
 
@@ -16,8 +12,16 @@ calendrConfig = (
 
     .state 'base',
       url: '/'
-      templateUrl: 'base.html'
-      controller: 'BaseCtrl as base'
+      views: {
+        "@": {
+          templateUrl: 'base.html'
+          controller: 'BaseCtrl as base'
+        }
+        "all@base": {
+          templateUrl: 'all.html'
+          controller: 'AllCtrl as all'
+        }
+      }
 
   $urlRouterProvider.otherwise '/'
 

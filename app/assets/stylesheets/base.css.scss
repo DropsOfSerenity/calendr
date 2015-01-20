@@ -1,3 +1,30 @@
+html { font-family: RobotoDraft, Roboto, 'Helvetica Neue', sans-serif; }
 label {
   text-shadow: none !important;
+}
+
+.schedulr-tabs {
+  z-index: 1;
+  -webkit-transition: all 0.45s cubic-bezier(0.35, 0, 0.25, 1);
+  transition: all 0.45s cubic-bezier(0.35, 0, 0.25, 1);
+  background: #fff;
+}
+
+md-tabs.schedulr-tabs md-tab,
+md-tabs.schedulr-tabs .md-header {
+  background-color: #444444 !important;
+}
+md-tabs.schedulr-tabs md-tab-label {
+  color: #ccc !important;
+}
+md-tabs.schedulr-tabs .active md-tab-label {
+  color: #fff !important;
+}
+.schedulr-tabs.ng-hide {
+  max-height: 0px;
+  min-height: 0px;
+}
+.schedulr-tabs md-tab {
+  background: #E0E0E0 !important;
+  color: #616161;
 }

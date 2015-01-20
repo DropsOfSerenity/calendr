@@ -1,66 +1,23 @@
-<div layout="column" layout-fill>
+<div layout-fill layout="column">
   <md-toolbar md-scroll-shrink>
     <div class="md-toolbar-tools">
-      <h1>
-        <span>SCHEDULR</span>
-      </h1>
-    </div>
-  </md-toolbar>
-  <md-sidenav md-component-id="left" class="md-sidenav-left">
-    <md-toolbar>
-      <h3 class="md-toolbar-tools">Events - Dec. 23</h3>
-    </md-toolbar>
-    <md-content md-theme="dark" class="md-padding" layout="column" layout-sm="column">
-
-      </md-input-container>
-      <md-button class="md-raised md-accent">Create New Event</md-button>
-
-    </md-content>
-
-    <md-divider></md-divider>
-
-    <md-list>
-      <md-item>
-        <md-item-content>
-          <div class="md-tile-left">
-            <md-checkbox ng-model="data.cb1">
-              DONE
-            </md-checkbox>
-          </div>
-          <div class="md-tile-content">
-            <h3>Test Content</h3>
-            <h4>at school</h4>
-            <p>Remember to do X</p>
-          </div>
-        </md-item-content>
-      </md-item>
-      <md-item>
-        <md-item-content>
-          <div class="md-tile-left">
-            <md-checkbox ng-model="data.cb2">
-              DONE
-            </md-checkbox>
-          </div>
-          <div class="md-tile-content">
-            <h3>More Test Content</h3>
-            <h4>at school</h4>
-            <p>Homework for anatomy due remember to do it.</p>
-          </div>
-        </md-item-content>
-      </md-item>
-    </md-list>
-  </md-sidenav>
-  <md-content class="md-padding">
-    <div class="md-whiteframe-z2">
-      <div layout="column">
-        <md-toolbar class="md-accent">
-          <h3 class="md-toolbar-tools">Calendar View</h3>
-        </md-toolbar>
-        <md-button ng-click="base.openLeftSidebar()">
-          Open Left Menu
-        </md-button>
-        <js-calendar></js-calendar>
+      <h3>
+        <span>Schedulr</span>
+      </h3>
+      <div class="md-tools">
+        <md-button>Add Homework</md-button>
       </div>
     </div>
-  </md-content>
+  </md-toolbar>
+  <md-tabs class="schedulr-tabs" md-stretch-tabs="always" md-selected="data.selectedIndex">
+    <md-tab label="All">
+      <div ui-view="all"></div>
+    </md-tab>
+    <md-tab label="Priority">
+      <div ui-view="priority"></div>
+    </md-tab>
+    <md-tab label="Class">
+      <div ui-view="class"></div>
+    </md-tab>
+  </md-tabs>
 </div>

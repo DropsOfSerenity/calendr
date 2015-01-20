@@ -1,9 +1,11 @@
-BaseCtrl = ($mdSidenav) ->
-  @openLeftSidebar = ->
-    $mdSidenav('left').toggle()
+BaseCtrl = ->
+  @testing = "hello"
+  @
 
+AllCtrl = ->
   @
 
 angular
   .module 'calendr'
+  .controller 'AllCtrl', AllCtrl
   .controller 'BaseCtrl', BaseCtrl
