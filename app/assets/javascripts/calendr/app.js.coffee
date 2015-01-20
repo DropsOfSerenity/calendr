@@ -26,6 +26,12 @@ calendrConfig = (
           templateUrl: 'all.html'
           controller: 'AllCtrl as all'
         }
+        "priority@base.planner-tabs": {
+          templateUrl: 'priority.html'
+        }
+        "subject@base.planner-tabs": {
+          templateUrl: 'subject.html'
+        }
       }
 
     .state 'base.add-homework',
