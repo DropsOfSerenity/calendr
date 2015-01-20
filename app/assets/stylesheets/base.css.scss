@@ -28,6 +28,10 @@ md-tabs.schedulr-tabs .active md-tab-label {
 .main-ui.ng-enter {
   -webkit-animation: fadeInDown 1s;
   animation: fadeInDown 1s;
+  visibility: hidden;
+}
+.main-ui.ng-enter-active {
+  visibility: visible;
 }
 
 .schedulr-tabs md-item-content:hover {
