@@ -29,3 +29,11 @@ md-tabs.schedulr-tabs .active md-tab-label {
   -webkit-animation: fadeInDown 1s;
   animation: fadeInDown 1s;
 }
+
+.schedulr-tabs md-item-content:hover {
+  background-color: #eee;
+}
+
+.homework-list .md-tile-content > span {
+  text-align:right
+}
