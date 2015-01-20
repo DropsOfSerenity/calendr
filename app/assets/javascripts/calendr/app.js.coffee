@@ -1,3 +1,7 @@
+calendrRun = ->
+  FastClick.attach(document.body)
+  return
+
 calendrConfig = (
     $stateProvider,
     $locationProvider,
@@ -54,4 +58,5 @@ angular
     'ngAria',
     'ngMaterial'
   ]
+  .run calendrRun
   .config calendrConfig

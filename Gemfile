@@ -33,6 +33,7 @@ gem 'rails-assets-hammerjs'
 gem 'rails-assets-angular-aria'
 gem 'rails-assets-moment'
 gem 'rails-assets-angular-material', '0.7.0.rc3'
+gem 'rails-assets-fastclick'
 
 group :development, :test do
   gem 'web-console'

@@ -10,5 +10,6 @@
 #= require angular-aria
 #= require angular-material
 #= require angular-messages
+#= require fastclick
 #= require_tree .
 #= require_tree ../templates
