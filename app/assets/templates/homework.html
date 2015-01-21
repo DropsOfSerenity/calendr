@@ -1,9 +1,9 @@
 <md-content layout="column" class="md-padding">
-  <form name="addHomeworkForm">
+  <form name="addHomeworkForm" novalidate ng-submit="hw.create()">
     <div layout="column">
       <md-input-container>
         <label>Title</label>
-        <input md-maxlength="50" required name="title" ng-model="homework.title">
+        <input md-maxlength="50" required name="title" ng-model="hw.homework.title">
         <div ng-messages="addHomeworkForm.title.$error">
           <div ng-message="required">This is required.</div>
           <div ng-message="md-maxlength">
@@ -11,25 +11,25 @@
           </div>
         </div>
       </md-input-container>
-      <md-input-container>
-        <label>Subject</label>
-        <input md-maxlength="50" name="subject" ng-model="homework.subject">
-        <div ng-messages="addHomeworkForm.subject.$error">
-          <div ng-message="md-maxlength">
-            The subject has to be less than 50 characters long.
+      <div layout="row">
+        <md-input-container flex>
+          <label>Subject</label>
+          <input md-maxlength="50" name="subject" ng-model="hw.homework.subject">
+          <div ng-messages="addHomeworkForm.subject.$error">
+            <div ng-message="md-maxlength">
+              The subject has to be less than 50 characters long.
+            </div>
           </div>
-        </div>
-      </md-input-container>
+        </md-input-container>
+        <md-input-container flex>
+          <label>&nbsp;</label>
+          <input type="text" pick-a-date="hw.homework.date" placeholder="Due Date"/>
+        </md-input-container>
+      </div>
       <md-input-container>
         <label>Description</label>
-        <textarea md-maxlength="500" name="desciption" ng-model="homework.description">
+        <textarea md-maxlength="500" name="desciption" ng-model="hw.homework.description">
         </textarea>
-      </md-input-container>
-      <md-input-container>
-        <label></label>
-        <input type="date" placeholder="Date Due" name="date" ng-model="homework.date">
-        <div ng-messages="addHomeworkForm.date.$error">
-        </div>
       </md-input-container>
     </div>
     <div layout="row">

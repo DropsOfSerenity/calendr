@@ -41,3 +41,16 @@ md-tabs.schedulr-tabs .active md-tab-label {
 .homework-list .md-tile-content > span {
   text-align:right
 }
+
+::-webkit-input-placeholder {
+  color: rgba(0,0,0,0.26);
+}
+:-moz-placeholder { /* older Firefox*/
+  color: rgba(0,0,0,0.26);
+}
+::-moz-placeholder { /* Firefox 19+ */ 
+  color: rgba(0,0,0,0.26);
+} 
+:-ms-input-placeholder { 
+  color: rgba(0,0,0,0.26);
+}

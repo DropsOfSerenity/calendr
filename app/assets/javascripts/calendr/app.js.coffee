@@ -41,6 +41,7 @@ calendrConfig = (
     .state 'base.add-homework',
       url: 'homework'
       templateUrl: 'homework.html'
+      controller: 'HomeworkAddCtrl as hw'
 
   $urlRouterProvider.otherwise '/planner'
 
@@ -56,6 +57,7 @@ angular
     'ngAnimate',
     'ngMessages',
     'ngAria',
+    'angular-datepicker',
     'ngMaterial'
   ]
   .run calendrRun
