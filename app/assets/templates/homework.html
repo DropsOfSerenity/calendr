@@ -1,22 +1,35 @@
-<md-content layout="column">
+<md-content layout="column" class="md-padding">
   <form name="addHomeworkForm">
     <div layout="column">
       <md-input-container>
         <label>Title</label>
         <input md-maxlength="50" required name="title" ng-model="homework.title">
-      
         <div ng-messages="addHomeworkForm.title.$error">
           <div ng-message="required">This is required.</div>
           <div ng-message="md-maxlength">
             The title has to be less than 50 characters long.
           </div>
         </div>
-      
+      </md-input-container>
+      <md-input-container>
+        <label>Subject</label>
+        <input md-maxlength="50" name="subject" ng-model="homework.subject">
+        <div ng-messages="addHomeworkForm.subject.$error">
+          <div ng-message="md-maxlength">
+            The subject has to be less than 50 characters long.
+          </div>
+        </div>
       </md-input-container>
       <md-input-container>
         <label>Description</label>
         <textarea md-maxlength="500" name="desciption" ng-model="homework.description">
         </textarea>
+      </md-input-container>
+      <md-input-container>
+        <label></label>
+        <input type="date" placeholder="Date Due" name="date" ng-model="homework.date">
+        <div ng-messages="addHomeworkForm.date.$error">
+        </div>
       </md-input-container>
     </div>
     <div layout="row">

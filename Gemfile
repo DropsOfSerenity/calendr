@@ -17,12 +17,12 @@ gem 'jquery-rails'
 gem 'unicorn'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
+
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
 
 # rails assets
 gem 'rails-assets-angular', '=1.3.8'
-gem 'rails-assets-angular-bootstrap'
 gem 'rails-assets-animate.css'
 gem 'rails-assets-angular-ui-router'
 gem 'rails-assets-angular-animate', '=1.3.8'
