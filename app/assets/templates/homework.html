@@ -28,7 +28,11 @@
         </textarea>
       </md-input-container>
       <md-input-container>
-        <input type="text" pick-a-date="hw.homework.date" placeholder="Due Date"/>
+        <input type="text" name="date" required
+               pick-a-date="hw.homework.date" placeholder="Due Date"/>
+        <div ng-messages="addHomeworkForm.date.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
       </md-input-container>
     </div>
     <div layout="row">

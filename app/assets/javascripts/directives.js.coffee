@@ -9,7 +9,10 @@ pickADate = ->
     link: (scope, elem, attrs) ->
       picker = $(elem).pickadate({
         onSet: (context) ->
-          scope.pickADate = this.get('select')?.obj
+          if context.hasOwnProperty 'clear'
+            scope.pickADate = ''
+          else
+            scope.pickADate = this.get('select')?.obj
           scope.$apply()
       })
       return
