@@ -1,0 +1,22 @@
+<md-dialog style="max-width: 400px; width: 100%">
+  <md-content>
+    <form name="loginForm" novalidate ng-submit="doLogin()">
+      <md-input-container>
+        <label>Email</label>
+        <input required name="email" type="email" ng-model="login.email">
+        <div ng-messages="loginForm.email.$error">
+          <div ng-message="required">This is required.</div>
+          <div ng-message="email">Please enter a valid email address.</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>Password</label>
+        <input required type="password" name="password" ng-model="login.password">
+        <div ng-messages="loginForm.password.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+      <md-button ng-disabled="!loginForm.$valid" class="md-primary" type="submit">Login!</md-button>
+    </form>
+  </md-content>
+</md-dialog>
