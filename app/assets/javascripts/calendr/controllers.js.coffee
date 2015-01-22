@@ -54,8 +54,8 @@ RegisterCtrl = ($scope, Auth, $mdDialog) ->
   $scope.doRegister = ->
     Auth.register($scope.register)
       .then (registeredUser) ->
-        $state.go('base.planner-tabs')
         $mdDialog.hide()
+        $state.go('base.planner-tabs')
       , (response) ->
         angular.forEach response.data.errors, (e, field) ->
           $scope.registerForm[field].$setValidity('server', false)
