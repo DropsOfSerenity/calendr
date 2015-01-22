@@ -10,7 +10,8 @@
 #= require angular-aria
 #= require angular-material
 #= require angular-messages
-#= require angular-native-picker
+#= require pickadate/picker
+#= require pickadate/picker.date
 #= require fastclick
 #= require_tree .
 #= require_tree ../templates

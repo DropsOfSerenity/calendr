@@ -57,7 +57,6 @@ angular
     'ngAnimate',
     'ngMessages',
     'ngAria',
-    'angular-datepicker',
     'ngMaterial'
   ]
   .run calendrRun

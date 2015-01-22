@@ -21,15 +21,14 @@
             </div>
           </div>
         </md-input-container>
-        <md-input-container flex>
-          <label>&nbsp;</label>
-          <input type="text" pick-a-date="hw.homework.date" placeholder="Due Date"/>
-        </md-input-container>
       </div>
       <md-input-container>
         <label>Description</label>
         <textarea md-maxlength="500" name="desciption" ng-model="hw.homework.description">
         </textarea>
+      </md-input-container>
+      <md-input-container>
+        <input type="text" pick-a-date="hw.homework.date" placeholder="Due Date"/>
       </md-input-container>
     </div>
     <div layout="row">
@@ -38,3 +37,4 @@
     </div>
   </form>
 </md-content>
+

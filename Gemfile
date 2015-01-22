@@ -21,6 +21,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
 
+gem 'pickadate-rails'
 # rails assets
 gem 'rails-assets-angular', '=1.3.8'
 gem 'rails-assets-animate.css'
@@ -33,7 +34,6 @@ gem 'rails-assets-hammerjs'
 gem 'rails-assets-angular-aria'
 gem 'rails-assets-moment'
 gem 'rails-assets-angular-material', '0.7.0.rc3'
-gem 'rails-assets-angular-native-picker'
 gem 'rails-assets-fastclick'
 
 group :development, :test do
