@@ -57,6 +57,7 @@ angular
     'ngAnimate',
     'ngMessages',
     'ngAria',
+    'Devise',
     'ngMaterial'
   ]
   .run calendrRun

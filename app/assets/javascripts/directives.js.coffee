@@ -18,5 +18,16 @@ pickADate = ->
       return
   }
 
+clearServerError = ->
+  return {
+    restrict: 'A'
+    require: '?ngModel'
+    link: (scope, elem, attrs, ctrl) ->
+      elem.on 'input', ->
+        scope.$apply ->
+          ctrl.$setValidity('server', true)
+  }
+
 angular.module 'calendr'
   .directive 'pickADate', pickADate
+  .directive 'clearServerError', clearServerError

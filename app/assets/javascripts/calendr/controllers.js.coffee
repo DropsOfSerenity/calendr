@@ -1,5 +1,14 @@
+BaseCtrl = ($mdDialog, Auth) ->
+  # authentication stuff here
+  Auth.currentUser()
+    .then (user) =>
+      @current_user = user
+    , (error) =>
+      @current_user = null
 
-BaseCtrl = ($mdDialog) ->
+  @loggedIn = Auth.isAuthenticated
+  @logout = Auth.logout
+
   @showLogin = (ev) ->
     $mdDialog.show({
       controller: 'LoginCtrl'
@@ -27,18 +36,30 @@ HomeworkAddCtrl = () ->
 
   @
 
-LoginCtrl = ($scope) ->
+LoginCtrl = ($scope, Auth, $mdDialog, $state) ->
   $scope.login = {}
 
   $scope.doLogin = ->
-    console.log $scope.login
+    Auth.login($scope.login)
+      .then (user) ->
+        $state.go('base.planner-tabs')
+        $mdDialog.hide()
+      , (error) ->
+        $scope.loginForm.password.$setValidity('server', false)
 
-RegisterCtrl = ($scope) ->
+RegisterCtrl = ($scope, Auth, $mdDialog) ->
   $scope.register = {}
+  $scope.errors = {}
 
   $scope.doRegister = ->
-    console.log $scope.register
-
+    Auth.register($scope.register)
+      .then (registeredUser) ->
+        $state.go('base.planner-tabs')
+        $mdDialog.hide()
+      , (response) ->
+        angular.forEach response.data.errors, (e, field) ->
+          $scope.registerForm[field].$setValidity('server', false)
+          $scope.errors[field] = e.join(', ')
 angular
   .module 'calendr'
   .controller 'AllCtrl', AllCtrl
