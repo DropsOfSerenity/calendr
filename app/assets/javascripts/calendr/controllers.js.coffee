@@ -1,4 +1,4 @@
-BaseCtrl = ($mdDialog, Auth) ->
+BaseCtrl = ($scope, $mdDialog, Auth, PusherService, HomeworkService) ->
   # authentication stuff here
   Auth.currentUser()
     .then (user) =>
@@ -23,16 +23,30 @@ BaseCtrl = ($mdDialog, Auth) ->
       targetEvent: ev
     })
 
+  $scope.$on 'devise:login', (event, currentUser) ->
+    PusherService.subscribe()
+      .then ->
+        PusherService.channel.bind 'create', (data) ->
+          console.log 'new homework has been created server side...'
+          HomeworkService.add(data)
+
+  $scope.$on 'devise:new-session', (event, currentUser) ->
+
+
   return
 
-AllCtrl = ->
+AllCtrl = (HomeworkService) ->
+  @homework = HomeworkService
+
   @
 
-HomeworkAddCtrl = () ->
-  @homework = {}
+HomeworkAddCtrl = (HomeworkService, $state) ->
+  @form = {}
 
   @create = =>
-    console.log @homework
+    HomeworkService.create(@form)
+      .then ->
+        $state.go('base.planner-tabs')
 
   @
 

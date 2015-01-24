@@ -1,5 +1,8 @@
 calendrRun = ->
   FastClick.attach(document.body)
+
+  window.client = new Pusher('e575ad5b45914ce7b511')
+
   return
 
 calendrConfig = (
@@ -7,7 +10,11 @@ calendrConfig = (
     $locationProvider,
     $urlRouterProvider,
     $mdThemingProvider
+    RestangularProvider
   ) ->
+
+  RestangularProvider.setBaseUrl '/api/v1'
+  RestangularProvider.setRequestSuffix '.json'
 
   $mdThemingProvider.theme('dark', 'default')
     .dark()
@@ -58,6 +65,8 @@ angular
     'ngMessages',
     'ngAria',
     'Devise',
+    'pusher-angular',
+    'restangular',
     'ngMaterial'
   ]
   .run calendrRun

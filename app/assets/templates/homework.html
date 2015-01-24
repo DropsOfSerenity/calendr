@@ -3,7 +3,7 @@
     <div layout="column">
       <md-input-container>
         <label>Title</label>
-        <input md-maxlength="50" required name="title" ng-model="hw.homework.title">
+        <input md-maxlength="50" required name="title" ng-model="hw.form.title">
         <div ng-messages="addHomeworkForm.title.$error">
           <div ng-message="required">This is required.</div>
           <div ng-message="md-maxlength">
@@ -14,7 +14,7 @@
       <div layout="row">
         <md-input-container flex>
           <label>Subject</label>
-          <input md-maxlength="50" name="subject" ng-model="hw.homework.subject">
+          <input md-maxlength="50" name="subject" ng-model="hw.form.subject">
           <div ng-messages="addHomeworkForm.subject.$error">
             <div ng-message="md-maxlength">
               The subject has to be less than 50 characters long.
@@ -24,12 +24,12 @@
       </div>
       <md-input-container>
         <label>Description</label>
-        <textarea md-maxlength="500" name="desciption" ng-model="hw.homework.description">
+        <textarea md-maxlength="500" name="desciption" ng-model="hw.form.description">
         </textarea>
       </md-input-container>
       <md-input-container>
         <input type="text" name="date" required
-               pick-a-date="hw.homework.date" placeholder="Due Date"/>
+               pick-a-date="hw.form.due_date" placeholder="Due Date"/>
         <div ng-messages="addHomeworkForm.date.$error">
           <div ng-message="required">This is required.</div>
         </div>

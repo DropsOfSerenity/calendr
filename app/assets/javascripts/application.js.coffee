@@ -6,6 +6,8 @@
 #= require angular-ui-router
 #= require angular-rails-templates
 #= require hammerjs
+#= require pusher
+#= require pusher-angular
 #= require moment
 #= require angular-aria
 #= require angular-material
@@ -13,5 +15,7 @@
 #= require pickadate/picker
 #= require pickadate/picker.date
 #= require fastclick
+#= require lodash
+#= require restangular
 #= require_tree .
 #= require_tree ../templates

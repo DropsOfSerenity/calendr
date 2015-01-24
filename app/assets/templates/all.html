@@ -1,33 +1,16 @@
 <md-content md-theme="default">
   <md-list class="homework-list">
-    <md-item>
+    <md-item ng-repeat="homework in all.homework.homework">
       <md-item-content style="border-left: 5px solid red;">
         <div class="md-tile-content">
-          <h3>Anatomy Homework</h3>
-          <h4>2/3/2016</h4>
+          <h3>{{ homework.title }}</h3>
+          <h4>{{ homework.due_date | date:'fullDate' }}</h4>
           <p>
-            Read Pages 34-58 in Human Body the Great Picture Book.<br>
-            Need this finished ASAP
+            {{ homework.description }}
           </p>
         </div>
         <span class="md-tile-right" style="color: red; padding-right: 5px;">
-          &lt;1 Day
-        </span>
-      </md-item-content>
-      <md-divider></md-divider>
-    </md-item>
-    <md-item>
-      <md-item-content style="border-left: 5px solid blue;">
-        <div class="md-tile-content">
-          <h3>History Homework</h3>
-          <h4>2/3/2017</h4>
-          <p>
-            Read the entire history of the human race, no sweat finish this
-            later.
-          </p>
-        </div>
-        <span class="md-tile-right" style="padding-right: 5px;">
-          1 Year
+          {{ homework.due_date | date }}
         </span>
       </md-item-content>
       <md-divider></md-divider>
