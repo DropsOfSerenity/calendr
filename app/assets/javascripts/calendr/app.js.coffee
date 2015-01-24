@@ -1,7 +1,10 @@
-calendrRun = ->
+calendrRun = (RAILS_ENV) ->
   FastClick.attach(document.body)
 
-  window.client = new Pusher('e575ad5b45914ce7b511')
+  if RAILS_ENV == "production"
+    window.client = new Pusher('991b568ebb4df6ddf4a2')
+  else
+    window.client = new Pusher('e575ad5b45914ce7b511')
 
   return
 
@@ -59,6 +62,7 @@ calendrConfig = (
 
 angular
   .module 'calendr', [
+    'calendr.config',
     'templates',
     'ui.router',
     'ngAnimate',
