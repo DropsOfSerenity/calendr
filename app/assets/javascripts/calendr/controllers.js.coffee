@@ -31,6 +31,14 @@ BaseCtrl = ($scope, $mdDialog, Auth, PusherService, HomeworkService) ->
           console.log 'new homework has been created server side...'
           HomeworkService.add(data)
 
+  $scope.$on 'devise:new-registration', (event, user) ->
+    HomeworkService.init()
+    PusherService.subscribe()
+      .then ->
+        PusherService.channel.bind 'create', (data) ->
+          console.log 'new homework has been created server side...'
+          HomeworkService.add(data)
+
   $scope.$on 'devise:logout', (event, currentUser) ->
     HomeworkService.clear()
     PusherService.unsubscribe()
@@ -78,7 +86,6 @@ RegisterCtrl = ($scope, Auth, $mdDialog) ->
     Auth.register($scope.register)
       .then (registeredUser) ->
         $mdDialog.hide()
-        $state.go('base.planner-tabs')
       , (response) ->
         angular.forEach response.data.errors, (e, field) ->
           $scope.registerForm[field].$setValidity('server', false)
