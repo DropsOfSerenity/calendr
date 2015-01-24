@@ -35,7 +35,10 @@ HomeworkService = (Restangular, $mdToast) ->
           @homework.push(hw)
 
   @add = (homework) =>
-    $mdToast.show($mdToast.simple().content("#{homework.title} added!"))
+    $mdToast.show($mdToast
+      .simple()
+      .content("#{homework.title} added!")
+      .position("bottom right"))
     homework.due_date = new Date(homework.due_date)
     @homework.unshift(homework)
 
