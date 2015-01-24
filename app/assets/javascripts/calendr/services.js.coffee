@@ -26,13 +26,16 @@ PusherService = ($pusher, Auth) ->
 
 HomeworkService = (Restangular, $mdToast) ->
   @homework = []
+  @initialized = false
+
   hw = Restangular.all('homework')
 
   @init = =>
     hw.getList().then (homeworks) =>
-        angular.forEach homeworks, (hw) =>
-          hw.due_date = new Date(hw.due_date)
-          @homework.push(hw)
+      angular.forEach homeworks, (hw) =>
+        hw.due_date = new Date(hw.due_date)
+        @homework.push(hw)
+      @initialized = true
 
   @add = (homework) =>
     $mdToast.show($mdToast
@@ -47,6 +50,7 @@ HomeworkService = (Restangular, $mdToast) ->
 
   @clear = =>
     @homework = []
+    @initialized = false
 
   @
 
