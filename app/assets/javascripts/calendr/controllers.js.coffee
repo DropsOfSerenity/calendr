@@ -43,13 +43,19 @@ AllCtrl = (HomeworkService) ->
 
   @
 
-HomeworkAddCtrl = (HomeworkService, $state) ->
+HomeworkAddCtrl = ($scope, HomeworkService, $state) ->
   @form = {}
+  $scope.errors = {}
 
   @create = =>
     HomeworkService.create(@form)
       .then ->
         $state.go('base.planner-tabs')
+      , (response) ->
+        angular.forEach response.data.errors, (e, field) ->
+          console.log e, field
+          $scope.addHomeworkForm[field].$setValidity('server', false)
+          $scope.errors[field] = e.join(', ')
 
   @
 

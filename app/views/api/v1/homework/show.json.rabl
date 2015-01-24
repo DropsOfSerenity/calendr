@@ -1,5 +1,3 @@
-object @homework
+attributes :title, :subject, :description
 
-attributes :title, :subject, :description, :due_date
-
-node(:due_date) { |h| h.due_date.inspect }
+node(:due_date) { |h| h.due_date.iso8601 unless h.due_date.nil? }

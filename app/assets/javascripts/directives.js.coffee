@@ -4,15 +4,16 @@
 pickADate = ->
   return {
     restrict: 'A'
-    scope:
-      pickADate: '='
-    link: (scope, elem, attrs) ->
+    scope: {}
+    require: 'ngModel'
+    link: (scope, elem, attrs, ngModel) ->
       picker = $(elem).pickadate({
         onSet: (context) ->
           if context.hasOwnProperty 'clear'
-            scope.pickADate = ''
+            ngModel.$setViewValue ''
           else
-            scope.pickADate = this.get('select')?.obj
+            ngModel.$setViewValue(this.get('select')?.obj)
+          elem.trigger 'input'
           scope.$apply()
       })
       return

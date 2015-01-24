@@ -13,10 +13,14 @@ class Api::V1::HomeworkController < ApplicationController
 
   def create
     @homework = Homework.create(homework_params.merge(:user_id => current_user.id))
-    homework_json = Rabl::Renderer.json(@homework, 'homework/show',
+    if @homework.save
+      homework_json = Rabl::Renderer.json(@homework, 'homework/show',
                                         :view_path => 'app/views/api/v1')
-    Pusher.trigger("private-homework-#{current_user.id}", "create", homework_json)
-    respond_with :api, :v1, @homework
+      Pusher.trigger("private-homework-#{current_user.id}", "create", homework_json)
+      respond_with :api, :v1, @homework
+    else
+      respond_with @homework
+    end
   end
 
   private
