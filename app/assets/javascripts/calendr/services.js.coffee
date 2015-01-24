@@ -19,15 +19,20 @@ PusherService = ($pusher, Auth) ->
       .then (user) =>
         @channel = pusher.subscribe("private-homework-#{user.id}")
 
+  @unsubscribe = =>
+    pusher.unsubscribe(@channel.name)
+
   @
 
 HomeworkService = (Restangular, $mdToast) ->
   @homework = []
   hw = Restangular.all('homework')
-  hw.getList().then (homeworks) =>
-      angular.forEach homeworks, (hw) =>
-        hw.due_date = new Date(hw.due_date)
-        @homework.push(hw)
+
+  @init = =>
+    hw.getList().then (homeworks) =>
+        angular.forEach homeworks, (hw) =>
+          hw.due_date = new Date(hw.due_date)
+          @homework.push(hw)
 
   @add = (homework) =>
     $mdToast.show($mdToast.simple().content("#{homework.title} added!"))
@@ -36,6 +41,9 @@ HomeworkService = (Restangular, $mdToast) ->
 
   @create = (homework) =>
     hw.post(homework)
+
+  @clear = =>
+    @homework = []
 
   @
 

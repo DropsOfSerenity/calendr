@@ -24,13 +24,16 @@ BaseCtrl = ($scope, $mdDialog, Auth, PusherService, HomeworkService) ->
     })
 
   $scope.$on 'devise:login', (event, currentUser) ->
+    HomeworkService.init()
     PusherService.subscribe()
       .then ->
         PusherService.channel.bind 'create', (data) ->
           console.log 'new homework has been created server side...'
           HomeworkService.add(data)
 
-  $scope.$on 'devise:new-session', (event, currentUser) ->
+  $scope.$on 'devise:logout', (event, currentUser) ->
+    HomeworkService.clear()
+    PusherService.unsubscribe()
 
 
   return
