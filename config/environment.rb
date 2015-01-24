@@ -13,3 +13,5 @@ ActionMailer::Base.smtp_settings = {
   :domain         => 'heroku.com',
   :enable_starttls_auto => true
 }
+
+ActiveSupport::JSON::Encoding.use_standard_json_time_format = true
