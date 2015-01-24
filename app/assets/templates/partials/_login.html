@@ -18,7 +18,8 @@
           <div ng-message="server">Could not login, password incorrect.</div>
         </div>
       </md-input-container>
-      <md-button ng-disabled="!loginForm.$valid" class="md-primary" type="submit">Login!</md-button>
+      <md-button ng-disabled="!loginForm.$valid || submitting" class="md-primary" type="submit">Login!</md-button>
+      <md-progress-linear ng-if="submitting" md-mode="indeterminate"></md-progress-linear>
     </form>
   </md-content>
 </md-dialog>

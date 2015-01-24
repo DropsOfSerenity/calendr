@@ -29,8 +29,10 @@
           <div ng-message="server">{{ errors.password_confirmation }}</div>
         </div>
       </md-input-container>
-      <md-button ng-disabled="!registerForm.$valid" class="md-primary"
+      <md-button ng-disabled="!registerForm.$valid || submitting"
+        class="md-primary"
         type="submit">Register</md-button>
+      <md-progress-linear ng-if="submitting" md-mode="indeterminate"></md-progress-linear>
     </form>
   </md-content>
 </md-dialog>

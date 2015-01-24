@@ -69,24 +69,30 @@ HomeworkAddCtrl = ($scope, HomeworkService, $state) ->
 
 LoginCtrl = ($scope, Auth, $mdDialog, $state) ->
   $scope.login = {}
+  $scope.submitting = false
 
   $scope.doLogin = ->
+    $scope.submitting = true
     Auth.login($scope.login)
       .then (user) ->
         $state.go('base.planner-tabs')
         $mdDialog.hide()
       , (error) ->
+        $scope.submitting = false
         $scope.loginForm.password.$setValidity('server', false)
 
 RegisterCtrl = ($scope, Auth, $mdDialog) ->
   $scope.register = {}
   $scope.errors = {}
+  $scope.submitting = false
 
   $scope.doRegister = ->
+    $scope.submitting = true
     Auth.register($scope.register)
       .then (registeredUser) ->
         $mdDialog.hide()
       , (response) ->
+        $scope.submitting = false
         angular.forEach response.data.errors, (e, field) ->
           $scope.registerForm[field].$setValidity('server', false)
           $scope.errors[field] = e.join(', ')
