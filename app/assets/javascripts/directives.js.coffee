@@ -1,18 +1,28 @@
 #*
 # small wrapper directive around pickadate.js
 #
-pickADate = ->
+pickADate = ($filter) ->
   return {
     restrict: 'A'
-    scope: {}
+    scope: {
+      'ngModel': '=?'
+    }
     require: 'ngModel'
     link: (scope, elem, attrs, ngModel) ->
+      ngModel.$parsers.push (data) ->
+        return data
+
+      ngModel.$formatters.push (data) ->
+        return $filter('date')(data, "fullDate")
+
       picker = $(elem).pickadate({
         onSet: (context) ->
           if context.hasOwnProperty 'clear'
             ngModel.$setViewValue ''
           else
-            ngModel.$setViewValue(this.get('select')?.obj)
+            selected = this.get('select')
+            date = new Date(selected.year, selected.month, selected.date)
+            scope.ngModel = date
           elem.trigger 'input'
           scope.$apply()
       })
