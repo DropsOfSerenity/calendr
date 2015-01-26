@@ -62,7 +62,7 @@ HomeworkAddCtrl = ($scope, HomeworkService, $state) ->
   $scope.errors = {}
 
   @create = =>
-    HomeworkService.create(@form)
+    HomeworkService.post(@form)
       .then ->
         $state.go('base.planner-tabs')
       , (response) ->

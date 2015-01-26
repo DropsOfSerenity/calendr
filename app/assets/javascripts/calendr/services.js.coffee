@@ -38,26 +38,27 @@ HomeworkService = (Restangular, $mdToast) ->
       @initialized = true
 
   @add = (homework) =>
-    $mdToast.show($mdToast
-      .simple()
-      .content("#{homework.title} added!")
-      .position("bottom right"))
     homework.due_date = new Date(homework.due_date)
-    @homework.unshift(homework)
+    Restangular.one('homework', homework.id).get()
+      .then (new_hw) =>
+        @homework.unshift(new_hw)
+        $mdToast.show($mdToast
+          .simple()
+          .content("#{homework.title} added!")
+          .position("bottom right"))
 
   @update = (homework) =>
-    $mdToast.show($mdToast
-      .simple()
-      .content("#{homework.title} updated!")
-      .position("bottom right"))
     homeworkWithId = _.find @homework, (hw) =>
       return hw.id == homework.id
-    homeworkWithId.completed_at = homework.completed_at
-    homeworkWithId.title = homework.title
-    homeworkWithId.subject = homework.subject
-    homeworkWithId.description = homework.description
+    Restangular.one('homework', homework.id).get()
+      .then (new_hw) =>
+        _.assign(homeworkWithId, new_hw)
+        $mdToast.show($mdToast
+          .simple()
+          .content("#{homework.title} updated!")
+          .position("bottom right"))
 
-  @create = (homework) =>
+  @post = (homework) =>
     hw.post(homework)
 
   @clear = =>
