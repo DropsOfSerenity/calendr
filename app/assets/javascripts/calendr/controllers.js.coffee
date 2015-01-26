@@ -96,8 +96,26 @@ RegisterCtrl = ($scope, Auth, $mdDialog) ->
         angular.forEach response.data.errors, (e, field) ->
           $scope.registerForm[field].$setValidity('server', false)
           $scope.errors[field] = e.join(', ')
+
+# controller to provide actionables across all planner tabs
+PlannerCtrl = ($mdBottomSheet) ->
+  @showBottomGrid = (homework) ->
+    console.log homework
+    $mdBottomSheet.show {
+      templateUrl: 'partials/_actionable-bottom-grid.html'
+      controller: ($scope) ->
+        $scope.items = [
+          { name: 'Complete', icon: 'check' },
+        ]
+        $scope.listItemClick = ($index) ->
+          clickedItem = $scope.items[$index]
+          $mdBottomSheet.hide(clickedItem)
+    }
+  @
+
 angular
   .module 'calendr'
+  .controller 'PlannerCtrl', PlannerCtrl
   .controller 'AllCtrl', AllCtrl
   .controller 'BaseCtrl', BaseCtrl
   .controller 'HomeworkAddCtrl', HomeworkAddCtrl

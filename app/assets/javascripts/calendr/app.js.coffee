@@ -35,6 +35,7 @@ calendrConfig = (
       views: {
         "": {
           templateUrl: 'planner-tabs.html'
+          controller: 'PlannerCtrl as planner'
         }
         "all@base.planner-tabs": {
           templateUrl: 'all.html'

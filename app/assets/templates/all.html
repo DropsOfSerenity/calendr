@@ -1,6 +1,8 @@
 <md-content md-theme="default">
   <md-list class="homework-list">
-    <md-item ng-repeat="homework in all.homework.homework">
+    <md-item 
+      ng-repeat="homework in all.homework.homework"
+      ng-click="planner.showBottomGrid(homework)">
       <md-item-content style="border-left: 5px solid red;">
         <div class="md-tile-content">
           <h3>{{ homework.title }}</h3>

@@ -23,6 +23,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 gem 'pickadate-rails'
+gem 'font-awesome-rails'
+
 # rails assets
 gem 'rails-assets-angular', '=1.3.8'
 gem 'rails-assets-animate.css'
