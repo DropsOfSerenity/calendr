@@ -1,7 +1,8 @@
 <md-content md-theme="default">
   <md-list class="homework-list">
-    <md-item 
-      ng-repeat="homework in all.homework.homework"
+    <md-subheader class="md-accent">Upcoming</md-subheader>
+    <md-item
+      ng-repeat="homework in all.homework.homework | filter: {completed_at: 'null'} | isAfterNow | orderBy:'due_date'"
       ng-click="planner.showBottomGrid(homework)">
       <md-item-content style="border-left: 5px solid red;">
         <div class="md-tile-content">
@@ -12,7 +13,42 @@
           </p>
         </div>
         <span class="md-tile-right" style="color: red; padding-right: 5px;">
-          {{ homework.completed_at | date:'fullDate' }}
+        </span>
+      </md-item-content>
+      <md-divider></md-divider>
+    </md-item>
+    <md-subheader class="md-accent">Past Due</md-subheader>
+    <md-item
+      ng-repeat="homework in all.homework.homework | filter: {completed_at: 'null'} | isBeforeNow | orderBy:'due_date':true"
+      ng-click="planner.showBottomGrid(homework)">
+      <md-item-content style="border-left: 5px solid red;">
+        <div class="md-tile-content">
+          <h3>{{ homework.title }}</h3>
+          <h4>{{ homework.due_date | date:'fullDate' }}</h4>
+          <p>
+            {{ homework.description }}
+          </p>
+        </div>
+        <span class="md-tile-right" style="color: red; padding-right: 5px;">
+          {{ homework.completed_at ? "done" : "" }}
+        </span>
+      </md-item-content>
+      <md-divider></md-divider>
+    </md-item>
+    <md-subheader class="md-accent">Completed</md-subheader>
+    <md-item
+      ng-repeat="homework in all.homework.homework | filter: {completed_at: '!null'} | orderBy:'completed_at':true"
+      ng-click="planner.showBottomGrid(homework)">
+      <md-item-content style="border-left: 5px solid red;">
+        <div class="md-tile-content">
+          <h3>{{ homework.title }}</h3>
+          <h4>{{ homework.due_date | date:'fullDate' }}</h4>
+          <p>
+            {{ homework.description }}
+          </p>
+        </div>
+        <span class="md-tile-right" style="color: red; padding-right: 5px;">
+          <i class="fa fa-check"></i>
         </span>
       </md-item-content>
       <md-divider></md-divider>
