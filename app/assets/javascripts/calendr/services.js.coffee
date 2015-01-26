@@ -33,15 +33,13 @@ HomeworkService = (Restangular, $mdToast) ->
   @init = =>
     hw.getList().then (homeworks) =>
       angular.forEach homeworks, (hw) =>
-        hw.due_date = new Date(hw.due_date)
         @homework.push(hw)
       @initialized = true
 
   @add = (homework) =>
-    homework.due_date = new Date(homework.due_date)
     Restangular.one('homework', homework.id).get()
       .then (obj) =>
-        @homework.unshift(obj)
+        @homework.push(obj)
         $mdToast.show($mdToast
           .simple()
           .content("#{obj.title} added!")
