@@ -14,8 +14,7 @@ class Api::V1::HomeworkController < ApplicationController
   def create
     @homework = Homework.create(homework_params.merge(:user_id => current_user.id))
     if @homework.save
-      Pusher.trigger("private-homework-#{current_user.id}",
-                     "create", render_homework_json(@homework))
+      trigger_user_pusher_action("create")
       respond_with :api, :v1, @homework
     else
       respond_with @homework
@@ -24,15 +23,22 @@ class Api::V1::HomeworkController < ApplicationController
 
   def update
     @homework = Homework.find(params[:id])
-    @homework.update(homework_params)
+    if @homework.update_attributes(homework_params)
+      trigger_user_pusher_action("update")
+    end
     respond_with @homework
   end
 
   private
 
+  def trigger_user_pusher_action(action)
+      Pusher.trigger("private-homework-#{current_user.id}",
+                     action, render_homework_json(@homework))
+  end
+
   def homework_params
     params.require(:homework).permit(:title, :description, :subject, :due_date,
-                                     :completed)
+                                     :completed_at)
   end
 
   def render_homework_json(homework)

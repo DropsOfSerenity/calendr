@@ -12,7 +12,7 @@
           </p>
         </div>
         <span class="md-tile-right" style="color: red; padding-right: 5px;">
-          Due {{ homework.due_date | date:'shortDate' }}
+          {{ homework.completed_at | date:'fullDate' }}
         </span>
       </md-item-content>
       <md-divider></md-divider>

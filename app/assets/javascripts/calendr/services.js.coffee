@@ -45,6 +45,18 @@ HomeworkService = (Restangular, $mdToast) ->
     homework.due_date = new Date(homework.due_date)
     @homework.unshift(homework)
 
+  @update = (homework) =>
+    $mdToast.show($mdToast
+      .simple()
+      .content("#{homework.title} updated!")
+      .position("bottom right"))
+    homeworkWithId = _.find @homework, (hw) =>
+      return hw.id == homework.id
+    homeworkWithId.completed_at = homework.completed_at
+    homeworkWithId.title = homework.title
+    homeworkWithId.subject = homework.subject
+    homeworkWithId.description = homework.description
+
   @create = (homework) =>
     hw.post(homework)
 

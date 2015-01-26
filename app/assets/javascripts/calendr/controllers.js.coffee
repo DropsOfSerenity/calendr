@@ -30,6 +30,9 @@ BaseCtrl = ($scope, $mdDialog, Auth, PusherService, HomeworkService) ->
         PusherService.channel.bind 'create', (data) ->
           console.log 'new homework has been created server side...'
           HomeworkService.add(data)
+        PusherService.channel.bind 'update', (data) ->
+          console.log 'existing homework has been updated server side...'
+          HomeworkService.update(data)
 
   $scope.$on 'devise:new-registration', (event, user) ->
     HomeworkService.init()
@@ -38,6 +41,9 @@ BaseCtrl = ($scope, $mdDialog, Auth, PusherService, HomeworkService) ->
         PusherService.channel.bind 'create', (data) ->
           console.log 'new homework has been created server side...'
           HomeworkService.add(data)
+        PusherService.channel.bind 'update', (data) ->
+          console.log 'existing homework has been updated server side...'
+          HomeworkService.update(data)
 
   $scope.$on 'devise:logout', (event, currentUser) ->
     HomeworkService.clear()
@@ -103,13 +109,16 @@ PlannerCtrl = ($mdBottomSheet) ->
     console.log homework
     $mdBottomSheet.show {
       templateUrl: 'partials/_actionable-bottom-grid.html'
-      controller: ($scope) ->
+      controller: ($scope, $mdBottomSheet) ->
         $scope.items = [
           { name: 'Complete', icon: 'check' },
         ]
-        $scope.listItemClick = ($index) ->
-          clickedItem = $scope.items[$index]
-          $mdBottomSheet.hide(clickedItem)
+        $scope.listItemClick = ($index) =>
+          if $scope.items[$index].name == 'Complete'
+            homework.completed_at = new Date()
+            homework.put()
+
+          $mdBottomSheet.hide()
     }
   @
 
