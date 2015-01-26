@@ -1,6 +1,40 @@
 html { font-family: RobotoDraft, Roboto, 'Helvetica Neue', sans-serif; }
+html, body {
+  height: 100%
+}
+body {
+  overflow: hidden;
+  max-width: 100%; 
+  max-height: 100%;
+}
 label {
   text-shadow: none !important;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+md-content {
+  display: block;
+  position: relative;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+
+  &[md-scroll-y] {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  &[md-scroll-x] {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  &[md-scroll-xy] {
+  }
+
+  &.md-padding {
+    padding: 8px;
+  }
 }
 
 .schedulr-tabs {
