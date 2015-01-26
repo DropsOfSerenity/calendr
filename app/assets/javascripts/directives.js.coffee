@@ -25,6 +25,9 @@ pickADate = ($filter) ->
             scope.ngModel = date
           elem.trigger 'input'
           scope.$apply()
+        onOpen: () ->
+          # fixes a bug in pickadate on ios 8
+          $(elem).blur()
       })
       return
   }
