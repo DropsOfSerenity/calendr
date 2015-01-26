@@ -40,22 +40,22 @@ HomeworkService = (Restangular, $mdToast) ->
   @add = (homework) =>
     homework.due_date = new Date(homework.due_date)
     Restangular.one('homework', homework.id).get()
-      .then (new_hw) =>
-        @homework.unshift(new_hw)
+      .then (obj) =>
+        @homework.unshift(obj)
         $mdToast.show($mdToast
           .simple()
-          .content("#{homework.title} added!")
+          .content("#{obj.title} added!")
           .position("bottom right"))
 
   @update = (homework) =>
     homeworkWithId = _.find @homework, (hw) =>
       return hw.id == homework.id
     Restangular.one('homework', homework.id).get()
-      .then (new_hw) =>
-        _.assign(homeworkWithId, new_hw)
+      .then (obj) =>
+        _.assign(homeworkWithId, obj)
         $mdToast.show($mdToast
           .simple()
-          .content("#{homework.title} updated!")
+          .content("#{obj.title} updated!")
           .position("bottom right"))
 
   @post = (homework) =>
