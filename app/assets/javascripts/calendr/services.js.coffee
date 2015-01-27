@@ -30,6 +30,7 @@ HomeworkService = (Restangular, $mdToast) ->
 
   hw = Restangular.all('homework')
 
+  # Data population
   @init = =>
     hw.getList().then (homeworks) =>
       angular.forEach homeworks, (hw) =>
@@ -62,6 +63,26 @@ HomeworkService = (Restangular, $mdToast) ->
   @clear = =>
     @homework = []
     @initialized = false
+
+  # Collection
+  @upcoming = =>
+    upcoming = _.filter @homework, (homework) ->
+      return !homework.completed_at && moment(homework.due_date).isAfter(moment())
+    return upcoming.sort (a, b) ->
+      return new Date(a.due_date) - new Date(b.due_date)
+
+
+  @pastDue = =>
+    past_due = _.filter @homework, (homework) ->
+      return !homework.completed_at && moment(homework.due_date).isBefore(moment())
+    return past_due.sort (a, b) ->
+      return new Date(b.due_date) - new Date(a.due_date)
+
+  @completed = =>
+    completed = _.filter @homework, (homework) ->
+      return !!homework.completed_at
+    return completed.sort (a, b) ->
+      return new Date(b.completed_at) - new Date(a.completed_at)
 
   @
 

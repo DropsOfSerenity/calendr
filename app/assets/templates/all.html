@@ -2,7 +2,7 @@
   <md-list class="homework-list">
     <md-subheader class="md-accent">Upcoming</md-subheader>
     <md-item
-      ng-repeat="homework in all.homework.homework | filter: {completed_at: 'null'} | isAfterNow | orderBy:'due_date'"
+      ng-repeat="homework in all.homework.upcoming()"
       ng-click="planner.showBottomGrid(homework)">
       <md-item-content style="border-left: 5px solid red;">
         <div class="md-tile-content">
@@ -19,7 +19,7 @@
     </md-item>
     <md-subheader class="md-accent">Past Due</md-subheader>
     <md-item
-      ng-repeat="homework in all.homework.homework | filter: {completed_at: 'null'} | isBeforeNow | orderBy:'due_date':true"
+      ng-repeat="homework in all.homework.pastDue()"
       ng-click="planner.showBottomGrid(homework)">
       <md-item-content style="border-left: 5px solid red;">
         <div class="md-tile-content">
@@ -37,7 +37,7 @@
     </md-item>
     <md-subheader class="md-accent">Completed</md-subheader>
     <md-item
-      ng-repeat="homework in all.homework.homework | filter: {completed_at: '!null'} | orderBy:'completed_at':true"
+      ng-repeat="homework in all.homework.completed()"
       ng-click="planner.showBottomGrid(homework)">
       <md-item-content style="border-left: 5px solid red;">
         <div class="md-tile-content">
