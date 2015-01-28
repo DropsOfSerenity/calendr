@@ -61,9 +61,6 @@ calendrConfig = (
       url: 'homework'
       templateUrl: 'homework.html'
       controller: 'HomeworkAddCtrl as hw'
-      resolve:
-        subjects: (SubjectService) ->
-          return SubjectService.list()
 
   $urlRouterProvider.otherwise '/planner'
 

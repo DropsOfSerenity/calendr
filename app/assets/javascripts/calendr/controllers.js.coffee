@@ -57,8 +57,12 @@ AllCtrl = (HomeworkService) ->
 
   @
 
-HomeworkAddCtrl = ($scope, subjects, SubjectService, HomeworkService, $state) ->
-  @subjects = subjects || []
+HomeworkAddCtrl = ($scope, SubjectService, HomeworkService, $state) ->
+  @subjects = []
+  SubjectService.list().then (subject_list) =>
+      angular.forEach subject_list, (s) =>
+        @subjects.push(s)
+
   @newSubject = {color: '#454987'}
   @createNewSubject = false
 
