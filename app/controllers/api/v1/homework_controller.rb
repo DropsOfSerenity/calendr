@@ -1,6 +1,8 @@
 include ActionView::Helpers::DateHelper
 
 class Api::V1::HomeworkController < ApplicationController
+  before_filter :logged_in
+
   def index
     @homeworks = Homework.where(user_id: current_user.id)
     respond_with @homework
@@ -12,7 +14,7 @@ class Api::V1::HomeworkController < ApplicationController
   end
 
   def create
-    @homework = Homework.create(homework_params.merge(:user_id => current_user.id))
+    @homework = current_user.homeworks.create(homework_params)
     if @homework.save
       trigger_user_pusher_action("create", @homework.id)
       respond_with :api, :v1, @homework
@@ -23,13 +25,19 @@ class Api::V1::HomeworkController < ApplicationController
 
   def update
     @homework = Homework.find(params[:id])
-    if @homework.update_attributes(homework_params)
+    if @homework.update_attributes(homework_params) and !homework_params.empty?
       trigger_user_pusher_action("update", @homework.id)
+      respond_with @homework
+    else
+      render nothing: true, status: :bad_request
     end
-    respond_with @homework
   end
 
   private
+
+  def logged_in
+    render json: 'Bad credentials', status: 401 unless current_user
+  end
 
   def trigger_user_pusher_action(action, id)
       Pusher.trigger("private-homework-#{current_user.id}", action, {id: id})
