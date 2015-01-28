@@ -71,6 +71,7 @@ calendrConfig = (
 
 angular
   .module 'calendr', [
+    'lib.decorators', # monkey, oooh ooh
     'calendr.config',
     'templates',
     'ui.router',
