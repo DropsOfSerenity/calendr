@@ -71,6 +71,7 @@ HomeworkAddCtrl = ($scope, subjects, SubjectService, HomeworkService, $state) ->
     SubjectService.add(@newSubject)
       .then (data) =>
         @subjects.push data
+        @createNewSubject = false
         @newSubject = {color: '#454987'}
 
   @form = {}

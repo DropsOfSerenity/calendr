@@ -20,9 +20,21 @@
           <div ng-message="server">{{ errors.description }}</div>
         </div>
       </md-input-container>
-      <div layout="row">
+      <div layout="row" layout-wrap>
+        <md-button ng-repeat="subject in hw.subjects"
+          ng-click="hw.selectSubject(subject)"
+          ng-class="{ 'md-hue-2 md-primary': subject == hw.currentSubject }"
+          href="" class="md-raised"
+          style="margin: 3px 3px;border-left: {{ subject.color}} solid 4px;
+          text-transform: none;">
+          {{ subject.name }}
+        </md-button>
         <md-button ng-show="!hw.createNewSubject"
-          href="" class="md-accent" ng-click="hw.createNewSubject = true">Add a Subject
+          href=""
+          class="md-primary md-hue-2 md-raised"
+          ng-click="hw.createNewSubject = true"
+          style="margin: 3px 3px; width: 36px;">
+          <i class="fa fa-plus"></i>
         </md-button>
       </div>
       <div ng-if="hw.createNewSubject">
@@ -38,16 +50,6 @@
         </md-button>
         <md-button style="margin-top:-15px; display: inline-block;"
           href="" class="md-warn" ng-click="hw.createNewSubject = false">Cancel
-        </md-button>
-      </div>
-      <div layout="row" layout-wrap>
-        <md-button ng-repeat="subject in hw.subjects"
-          ng-click="hw.selectSubject(subject)"
-          ng-class="{ 'md-hue-2 md-primary': subject == hw.currentSubject }"
-          href="" class="md-raised"
-          style="margin: 3px 3px;border-left: {{ subject.color}} solid 4px;
-          text-transform: none;">
-          {{ subject.name }}
         </md-button>
       </div>
       <small ng-show="!hw.currentSubject" style="padding: 5px;">Please select a subject</small>
