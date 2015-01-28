@@ -4,7 +4,7 @@ class Api::V1::HomeworkController < ApplicationController
   before_filter :logged_in
 
   def index
-    @homeworks = Homework.where(user_id: current_user.id)
+    @homeworks = current_user.homeworks
     respond_with @homework
   end
 
