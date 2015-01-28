@@ -33,7 +33,30 @@ RSpec.describe Api::V1::SubjectController, :type => :controller do
         expect(json_response["name"]).to eq user_subject.name
       end
     end
+  end
 
+  describe "#create" do
+    context "with a logged in user" do
+      before :each do
+        @request.env["devise.mapping"] = Devise.mappings[:user]
+        user = FactoryGirl.create(:user)
+        sign_in user
+      end
+
+      it "should create a subject" do
+        post :create, format: :json, subject: {name: "Math", color: "#cccccc"}
+
+        expect(response.status).to be 201
+        expect(json_response["name"]).to eq "Math"
+        expect(json_response["color"]).to eq "#cccccc"
+      end
+    end
+    context "without a logged in user" do
+      it "should return 401" do
+        post :create, format: :json, subject: {name: "Math", color: "#cccccc"}
+        expect(response.status).to be 401
+      end
+    end
   end
 
   def json_response

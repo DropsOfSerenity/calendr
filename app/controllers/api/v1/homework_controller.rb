@@ -14,12 +14,12 @@ class Api::V1::HomeworkController < ApplicationController
   end
 
   def create
-    @homework = current_user.homeworks.create(homework_params)
-    if @homework.save
-      trigger_user_pusher_action("create", @homework.id)
-      respond_with :api, :v1, @homework
+    homework = current_user.homeworks.new(homework_params)
+    if homework.save
+      trigger_user_pusher_action("create", homework.id)
+      respond_with :api, :v1, homework
     else
-      respond_with @homework
+      respond_with homework
     end
   end
 
