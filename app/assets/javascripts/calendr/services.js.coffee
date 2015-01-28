@@ -24,6 +24,14 @@ PusherService = ($pusher, Auth) ->
 
   @
 
+SubjectService = (Restangular) ->
+  subject = Restangular.all('subject')
+
+  @list = ->
+    return subject.getList()
+
+  @
+
 HomeworkService = (Restangular, $mdToast) ->
   @homework = []
   @initialized = false
@@ -90,3 +98,4 @@ angular
   .module 'calendr'
   .service 'PusherService', PusherService
   .service 'HomeworkService', HomeworkService
+  .service 'SubjectService', SubjectService

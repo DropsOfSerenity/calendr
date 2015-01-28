@@ -1,5 +1,6 @@
 class Homework < ActiveRecord::Base
   belongs_to :user
+  belongs_to :subject
   validates :due_date, :presence => true
 
   def self.upcoming

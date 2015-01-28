@@ -57,7 +57,7 @@ AllCtrl = (HomeworkService) ->
 
   @
 
-HomeworkAddCtrl = ($scope, HomeworkService, $state) ->
+HomeworkAddCtrl = ($scope, SubjectService, HomeworkService, $state) ->
   @form = {}
   $scope.errors = {}
 

@@ -23,6 +23,7 @@ RSpec.describe Api::V1::HomeworkController, :type => :controller do
         @request.env["devise.mapping"] = Devise.mappings[:user]
         user = FactoryGirl.create(:user)
         sign_in user
+        @subject = user.subjects.create(name: "Math", color: "#cccccc")
       end
 
       it "should create homework" do
@@ -30,12 +31,11 @@ RSpec.describe Api::V1::HomeworkController, :type => :controller do
 
         post :create, format: :json, homework: {
           title: "Test Homework",
-          subject: "Test Subject",
+          subject_id: @subject.id,
           description: "Test Description",
           due_date: Time.now }
 
         expect(json_response["title"]).to eq "Test Homework"
-        expect(json_response["subject"]).to eq "Test Subject"
         expect(json_response["description"]).to eq "Test Description"
       end
     end
@@ -44,7 +44,7 @@ RSpec.describe Api::V1::HomeworkController, :type => :controller do
       it "should return 401" do
         post :create, format: :json, homework: {
           title: "Test Homework",
-          subject: "Test Subject",
+          subject_id: 1,
           description: "Test Description",
           due_date: Time.now }
         expect(response.status).to eq 401

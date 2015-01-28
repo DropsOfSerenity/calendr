@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :homework do
     title { Faker::Lorem.word }
-    subject { Faker::Lorem.word }
     description { Faker::Lorem.sentence(1) }
     user
+    subject
     due_date Time.now
 
     trait :due_tomorrow do
