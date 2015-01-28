@@ -37,6 +37,7 @@ gem 'rails-assets-pusher'
 gem 'rails-assets-pusher-angular'
 gem 'rails-assets-lodash'
 gem 'rails-assets-restangular'
+gem 'rails-assets-spectrum'
 
 group :development do
   gem 'spring'

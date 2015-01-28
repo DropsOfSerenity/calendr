@@ -16,6 +16,7 @@
 #= require pickadate/picker.date
 #= require fastclick
 #= require lodash
+#= require spectrum
 #= require restangular
 #= require_tree .
 #= require_tree ../templates

@@ -31,10 +31,7 @@
             <label>New Subject Name</label>
             <input ng-model="hw.newSubject.name">
           </md-input-container>
-          <md-input-container>
-            <label>&nbsp;</label>
-            <input type="color" ng-model="hw.newSubject.color">
-          </md-input-container>
+          <input type="text" spectrum-color-picker ng-model="hw.newSubject.color">
         </div>
         <md-button style="margin-top:-15px; display: inline-block;"
           href="" class="md-accent" ng-click="hw.addSubject()">Add
