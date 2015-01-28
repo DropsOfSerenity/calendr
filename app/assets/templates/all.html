@@ -4,7 +4,7 @@
     <md-item
       ng-repeat="homework in all.homework.upcoming()"
       ng-click="planner.showBottomGrid(homework)">
-      <md-item-content style="border-left: 5px solid red;">
+      <md-item-content style="border-left: 5px solid {{ homework.subject.color }};">
         <div class="md-tile-content">
           <h3>{{ homework.title }}</h3>
           <h4>{{ homework.due_date | date:'fullDate' }}</h4>
@@ -21,7 +21,7 @@
     <md-item
       ng-repeat="homework in all.homework.pastDue()"
       ng-click="planner.showBottomGrid(homework)">
-      <md-item-content style="border-left: 5px solid red;">
+      <md-item-content style="border-left: 5px solid {{ homework.subject.color }};">
         <div class="md-tile-content">
           <h3>{{ homework.title }}</h3>
           <h4>{{ homework.due_date | date:'fullDate' }}</h4>
@@ -39,7 +39,7 @@
     <md-item
       ng-repeat="homework in all.homework.completed()"
       ng-click="planner.showBottomGrid(homework)">
-      <md-item-content style="border-left: 5px solid red;">
+      <md-item-content style="border-left: 5px solid {{ homework.subject.color }};">
         <div class="md-tile-content">
           <h3>{{ homework.title }}</h3>
           <h4>{{ homework.due_date | date:'fullDate' }}</h4>
@@ -47,7 +47,7 @@
             {{ homework.description }}
           </p>
         </div>
-        <span class="md-tile-right" style="color: red; padding-right: 5px;">
+        <span class="md-tile-right" style="color: green; padding-right: 5px;">
           <i class="fa fa-check"></i>
         </span>
       </md-item-content>

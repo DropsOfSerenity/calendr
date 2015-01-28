@@ -24,13 +24,6 @@ PusherService = ($pusher, Auth) ->
 
   @
 
-SubjectService = (Restangular) ->
-  subject = Restangular.all('subject')
-
-  @list = ->
-    return subject.getList()
-
-  @
 
 HomeworkService = (Restangular, $mdToast) ->
   @homework = []
@@ -91,6 +84,17 @@ HomeworkService = (Restangular, $mdToast) ->
       return !!homework.completed_at
     return completed.sort (a, b) ->
       return new Date(b.completed_at) - new Date(a.completed_at)
+
+  @
+
+SubjectService = (Restangular) ->
+  subject = Restangular.all('subject')
+
+  @list = ->
+    return subject.getList()
+
+  @add = (params) ->
+    return subject.post(params)
 
   @
 

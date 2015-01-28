@@ -57,11 +57,27 @@ AllCtrl = (HomeworkService) ->
 
   @
 
-HomeworkAddCtrl = ($scope, SubjectService, HomeworkService, $state) ->
+HomeworkAddCtrl = ($scope, subjects, SubjectService, HomeworkService, $state) ->
+  @subjects = subjects || []
+  @newSubject = {color: '#454987'}
+  @createNewSubject = false
+
+  @currentSubject = null
+  @selectSubject = (subject) =>
+    @currentSubject = subject
+
+
+  @addSubject = () =>
+    SubjectService.add(@newSubject)
+      .then (data) =>
+        @subjects.push data
+        @newSubject = {color: '#454987'}
+
   @form = {}
   $scope.errors = {}
 
   @create = =>
+    @form.subject_id = @currentSubject.id
     HomeworkService.post(@form)
       .then ->
         $state.go('base.planner-tabs')

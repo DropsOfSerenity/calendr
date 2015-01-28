@@ -19,6 +19,14 @@ calendrConfig = (
   RestangularProvider.setBaseUrl '/api/v1'
   RestangularProvider.setRequestSuffix '.json'
 
+  $mdThemingProvider.theme('default')
+    .primaryColor('blue', {
+      'default': '900',
+      'hue-1': '100',
+      'hue-2': '600',
+      'hue-3': 'A100'
+    })
+    .accentColor('green');
   $mdThemingProvider.theme('dark', 'default')
     .dark()
 
@@ -53,6 +61,9 @@ calendrConfig = (
       url: 'homework'
       templateUrl: 'homework.html'
       controller: 'HomeworkAddCtrl as hw'
+      resolve:
+        subjects: (SubjectService) ->
+          return SubjectService.list()
 
   $urlRouterProvider.otherwise '/planner'
 

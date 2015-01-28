@@ -11,18 +11,6 @@
           </div>
         </div>
       </md-input-container>
-      <div layout="row">
-        <md-input-container flex>
-          <label>Subject</label>
-          <input md-maxlength="50" required name="subject" ng-model="hw.form.subject">
-          <div ng-messages="addHomeworkForm.subject.$error">
-            <div ng-message="md-maxlength">
-              The subject has to be less than 50 characters long.
-            </div>
-            <div ng-message="required">This is required.</div>
-          </div>
-        </md-input-container>
-      </div>
       <md-input-container>
         <label>Description</label>
         <textarea md-maxlength="500" required name="description" ng-model="hw.form.description">
@@ -32,13 +20,47 @@
           <div ng-message="server">{{ errors.description }}</div>
         </div>
       </md-input-container>
+      <div layout="row">
+        <md-button ng-show="!hw.createNewSubject"
+          href="" class="md-accent" ng-click="hw.createNewSubject = true">Add a Subject
+        </md-button>
+      </div>
+      <div ng-if="hw.createNewSubject">
+        <div layout="row">
+          <md-input-container>
+            <label>New Subject Name</label>
+            <input ng-model="hw.newSubject.name">
+          </md-input-container>
+          <md-input-container>
+            <label>&nbsp;</label>
+            <input type="color" ng-model="hw.newSubject.color">
+          </md-input-container>
+        </div>
+        <md-button style="margin-top:-15px; display: inline-block;"
+          href="" class="md-accent" ng-click="hw.addSubject()">Add
+        </md-button>
+        <md-button style="margin-top:-15px; display: inline-block;"
+          href="" class="md-warn" ng-click="hw.createNewSubject = false">Cancel
+        </md-button>
+      </div>
+      <div layout="row" layout-wrap>
+        <md-button ng-repeat="subject in hw.subjects"
+          ng-click="hw.selectSubject(subject)"
+          ng-class="{ 'md-hue-2 md-primary': subject == hw.currentSubject }"
+          href="" class="md-raised"
+          style="margin: 3px 3px;border-left: {{ subject.color}} solid 4px;
+          text-transform: none;">
+          {{ subject.name }}
+        </md-button>
+      </div>
+      <small ng-show="!hw.currentSubject" style="padding: 5px;">Please select a subject</small>
       <md-input-container>
         <input type="text" name="due_date"
-          clear-server-error
-          required
-          pick-a-date
-          ng-model="hw.form.due_date"
-          placeholder="Due Date"/>
+        clear-server-error
+        required
+        pick-a-date
+        ng-model="hw.form.due_date"
+        placeholder="Due Date"/>
         <div ng-messages="addHomeworkForm.due_date.$error">
           <div ng-message="required">This is required.</div>
           <div ng-message="server">{{ errors.due_date }}</div>
@@ -46,7 +68,7 @@
       </md-input-container>
     </div>
     <div layout="row">
-      <md-button class="md-primary" ng-disabled="!addHomeworkForm.$valid" type="submit">Create Homework</md-button>
+      <md-button class="md-primary" ng-disabled="!addHomeworkForm.$valid || !hw.currentSubject" type="submit">Create Homework</md-button>
       <md-button class="md-warn" ui-sref="base.planner-tabs">Cancel</md-button>
     </div>
   </form>
