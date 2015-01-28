@@ -18,11 +18,6 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'unicorn'
 gem 'sdoc', '~> 0.4.0',          group: :doc
-
-
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
-
 gem 'pickadate-rails'
 gem 'font-awesome-rails'
 
@@ -43,6 +38,10 @@ gem 'rails-assets-pusher-angular'
 gem 'rails-assets-lodash'
 gem 'rails-assets-restangular'
 
+group :development do
+  gem 'spring'
+end
+
 group :development, :test do
   gem 'web-console'
   gem 'byebug'
@@ -59,9 +58,3 @@ group :production do
   gem 'rails_12factor'
   gem 'rails_serve_static_assets'
 end
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
