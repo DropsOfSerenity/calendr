@@ -55,6 +55,10 @@ group :development, :test do
   gem 'faker'
 end
 
+group :test do
+  gem 'pusher-fake'
+end
+
 group :production do
   gem 'rails_12factor'
   gem 'rails_serve_static_assets'
