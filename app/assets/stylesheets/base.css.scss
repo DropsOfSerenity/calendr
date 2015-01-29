@@ -75,10 +75,6 @@ md-tabs.schedulr-tabs .active md-tab-label {
   background-color: #e3e3e3;
 }
 
-.homework-list .md-tile-content > span {
-  text-align:right
-}
-
 ::-webkit-input-placeholder {
   color: rgba(0,0,0,0.26);
 }
@@ -153,5 +149,23 @@ md-tabs.schedulr-tabs .active md-tab-label {
 
   md-list {
     padding:0;
+  }
+}
+
+.homework-list .md-tile-content > span {
+  text-align:right
+}
+
+.homework-confirm {
+  .md-button {
+    display: block;
+    margin: 1em;
+    line-height: 25px;
+  }
+  .subject-choose {
+    margin: 10px 0 !important;
+  }
+  input[name="due_date"] {
+    margin: 10px 0 !important;
   }
 }

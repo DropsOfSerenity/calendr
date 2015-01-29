@@ -8,6 +8,16 @@
     </span>
   </md-button>
   <md-list ng-hide="!all.upcomingOpen" class="menu-toggle-list homework-list">
+    <md-item ng-if="all.homework.upcoming().length === 0">
+      <md-item-content>
+        <div class="md-tile-content">
+          <p>
+            Looks like you have no upcoming homework. Kick back and chill.
+            Or <a ui-sref="base.add-homework">add</a> some ;)
+          </p>
+        </div>
+      </md-item-content>
+    </md-item>
     <md-item
       ng-repeat="homework in all.homework.upcoming()"
       ng-click="planner.showBottomGrid(homework)">
@@ -35,6 +45,15 @@
     </span>
   </md-button>
   <md-list ng-hide="!all.pastDueOpen" class="menu-toggle-list">
+    <md-item ng-if="all.homework.pastDue().length === 0">
+      <md-item-content>
+        <div class="md-tile-content">
+          <p>
+            Great job, you have nothing past due!
+          </p>
+        </div>
+      </md-item-content>
+    </md-item>
     <md-item
       ng-repeat="homework in all.homework.pastDue()"
       ng-click="planner.showBottomGrid(homework)">
@@ -63,6 +82,15 @@
     </span>
   </md-button>
   <md-list ng-hide="!all.completedOpen" class="menu-toggle-list">
+    <md-item ng-if="all.homework.completed().length === 0">
+      <md-item-content>
+        <div class="md-tile-content">
+          <p>
+            You have nothing completed... Yet :)
+          </p>
+        </div>
+      </md-item-content>
+    </md-item>
     <md-item
       ng-repeat="homework in all.homework.completed()"
       ng-click="planner.showBottomGrid(homework)">
