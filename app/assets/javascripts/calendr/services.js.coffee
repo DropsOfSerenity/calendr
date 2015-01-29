@@ -32,10 +32,9 @@ HomeworkService = (Restangular, $mdToast) ->
   # here is all of our homework domain logic, these will be available on any
   # restangular homework object
   Restangular.extendModel 'homework', (model) ->
-    return _.extend model, {
+    return _.extend model,
       timeUntilDue: () ->
-        return moment(@due_date).fromNow()
-    }
+        return moment(@due_date).from(moment().startOf('day'))
 
   hw = Restangular.all('homework')
 

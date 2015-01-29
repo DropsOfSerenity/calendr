@@ -67,7 +67,7 @@
           </p>
         </div>
         <span class="md-tile-right" style="color: red; padding-right: 5px;">
-          {{ homework.completed_at ? "done" : "" }}
+          Was due {{ homework.timeUntilDue() }}
         </span>
       </md-item-content>
       <md-divider></md-divider>
