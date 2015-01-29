@@ -75,7 +75,6 @@ calendrConfig = (
 
 angular
   .module 'calendr', [
-    'lib.decorators', # monkey, oooh ooh
     'calendr.config',
     'templates',
     'ui.router',
@@ -85,7 +84,7 @@ angular
     'Devise',
     'pusher-angular',
     'restangular',
-    'ngMaterial'
+    'ngMaterial',
   ]
   .run calendrRun
   .config calendrConfig

@@ -22,7 +22,14 @@ gem 'pickadate-rails'
 gem 'font-awesome-rails'
 
 # rails assets
-gem 'rails-assets-angular', '=1.3.8'
+#
+# === ANGULAR BREAKING BUG ===
+# https://github.com/angular/angular.js/issues/9128
+# I'm using a monkey patched version of angular until they get their stuff
+# together and fix this bug.
+#
+# gem 'rails-assets-angular', '=1.3.8'
+#
 gem 'rails-assets-animate.css'
 gem 'rails-assets-angular-ui-router'
 gem 'rails-assets-angular-animate', '=1.3.8'
