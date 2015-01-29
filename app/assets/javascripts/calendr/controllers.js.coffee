@@ -1,13 +1,11 @@
 BaseCtrl = ($scope, $mdDialog, Auth, PusherService, HomeworkService) ->
   # authentication stuff here
-  Auth.currentUser()
-    .then (user) =>
-      @current_user = user
-    , (error) =>
-      @current_user = null
-
-  @loggedIn = Auth.isAuthenticated
-  @logout = Auth.logout
+  @showLoginAttempt = () ->
+    $mdDialog.show({
+      templateUrl: 'partials/_login_attempt.html'
+      clickOutsideToClose: false
+      escapeToClose: false
+    })
 
   @showLogin = (ev) ->
     $mdDialog.show({
@@ -22,6 +20,20 @@ BaseCtrl = ($scope, $mdDialog, Auth, PusherService, HomeworkService) ->
       templateUrl: 'partials/_register.html'
       targetEvent: ev
     })
+
+  # here we should block until this is resolved
+  @showLoginAttempt()
+  Auth.currentUser()
+    .then (user) =>
+      @current_user = user
+      $mdDialog.hide()
+    , (error) =>
+      @current_user = null
+      $mdDialog.hide()
+      @showLogin()
+
+  @loggedIn = Auth.isAuthenticated
+  @logout = Auth.logout
 
   $scope.$on 'devise:login', (event, currentUser) ->
     HomeworkService.init()
