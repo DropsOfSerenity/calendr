@@ -55,6 +55,10 @@ BaseCtrl = ($scope, $mdDialog, Auth, PusherService, HomeworkService) ->
 AllCtrl = (HomeworkService) ->
   @homework = HomeworkService
 
+  @upcomingOpen = true
+  @pastDueOpen = false
+  @completedOpen = false
+
   @
 
 HomeworkAddCtrl = ($scope, SubjectService, HomeworkService, $state) ->

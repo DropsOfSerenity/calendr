@@ -1,6 +1,13 @@
-<md-content md-scroll-y md-theme="default">
-  <md-list class="homework-list">
-    <md-subheader class="md-primary">Upcoming</md-subheader>
+<md-content class="all-list" layout="column" md-scroll-y md-theme="default">
+  <md-button class="md-button-toggle md-primary"
+    ng-click="all.upcomingOpen = !all.upcomingOpen"
+    flex layout="row">
+    Upcoming
+    <span aria-hidden="true" class="md-toggle-icon"
+      ng-class="{'toggled' : all.upcomingOpen}">
+    </span>
+  </md-button>
+  <md-list ng-hide="!all.upcomingOpen" class="menu-toggle-list homework-list">
     <md-item
       ng-repeat="homework in all.homework.upcoming()"
       ng-click="planner.showBottomGrid(homework)">
@@ -17,7 +24,17 @@
       </md-item-content>
       <md-divider></md-divider>
     </md-item>
-    <md-subheader class="md-warn">Past Due</md-subheader>
+  </md-list>
+
+  <md-button class="md-button-toggle md-warn"
+    ng-click="all.pastDueOpen = !all.pastDueOpen"
+    flex layout="row">
+    Past Due
+    <span aria-hidden="true" class="md-toggle-icon"
+      ng-class="{'toggled' : all.pastDueOpen}">
+    </span>
+  </md-button>
+  <md-list ng-hide="!all.pastDueOpen" class="menu-toggle-list">
     <md-item
       ng-repeat="homework in all.homework.pastDue()"
       ng-click="planner.showBottomGrid(homework)">
@@ -35,7 +52,17 @@
       </md-item-content>
       <md-divider></md-divider>
     </md-item>
-    <md-subheader class="md-accent">Completed</md-subheader>
+  </md-list>
+
+  <md-button class="md-button-toggle md-accent"
+    ng-click="all.completedOpen = !all.completedOpen"
+    flex layout="row">
+    Completed
+    <span aria-hidden="true" class="md-toggle-icon"
+      ng-class="{'toggled' : all.completedOpen}">
+    </span>
+  </md-button>
+  <md-list ng-hide="!all.completedOpen" class="menu-toggle-list">
     <md-item
       ng-repeat="homework in all.homework.completed()"
       ng-click="planner.showBottomGrid(homework)">
