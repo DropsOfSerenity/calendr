@@ -1,11 +1,21 @@
-<md-tabs md-scroll-y class="schedulr-tabs" md-stretch-tabs="never" md-selected="data.selectedIndex">
-  <md-tab label="All">
-    <div ui-view="all"></div>
+<md-tabs class="schedulr-tabs" md-stretch-tabs="never" md-selected="data.selectedIndex">
+  <md-tab>
+    All
   </md-tab>
-  <md-tab label="Priority">
-    <div ui-view="priority"></div>
+  <md-tab>
+    Priority
   </md-tab>
-  <md-tab label="Subject">
-    <div ui-view="subject"></div>
+  <md-tab>
+    Subject
   </md-tab>
 </md-tabs>
+
+<md-content ng-show="data.selectedIndex === 0" md-scroll-y flex>
+  <div ui-view="all"></div>
+</md-content>
+<md-content ng-show="data.selectedIndex === 1" md-scroll-y flex>
+  <div ui-view="priority"></div>
+</md-content>
+<md-content ng-show="data.selectedIndex === 2" md-scroll-y flex>
+  <div ui-view="subject"></div>
+</md-content>
