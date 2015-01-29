@@ -21,8 +21,7 @@ pickADate = ($filter) ->
             ngModel.$setViewValue ''
           else
             selected = this.get('select')
-            date = new Date(selected.year, selected.month, selected.date)
-            scope.ngModel = date
+            scope.ngModel = new Date(selected.year, selected.month, selected.date) if selected
           elem.trigger 'input'
           scope.$apply()
         onOpen: () ->
