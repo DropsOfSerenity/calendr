@@ -29,6 +29,14 @@ HomeworkService = (Restangular, $mdToast) ->
   @homework = []
   @initialized = false
 
+  # here is all of our homework domain logic, these will be available on any
+  # restangular homework object
+  Restangular.extendModel 'homework', (model) ->
+    return _.extend model, {
+      timeUntilDue: () ->
+        return moment(@due_date).fromNow()
+    }
+
   hw = Restangular.all('homework')
 
   # Data population
