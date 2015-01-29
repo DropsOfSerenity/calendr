@@ -11,7 +11,6 @@ feature 'Login', js: true do
 
     scenario 'sign in with valid credentials' do
       visit '/'
-      click_button 'Login'
       fill_in 'Email', with: @user.email
       fill_in 'Password', with: @user.password
       click_button 'Login!'
@@ -21,7 +20,6 @@ feature 'Login', js: true do
 
     scenario 'sign in with invalid credentials' do
       visit '/'
-      click_button 'Login'
       fill_in 'Email', with: @user.email
       fill_in 'Password', with: "#{@user.password}invalid"
       expect(page).to have_content('LOGIN!')
