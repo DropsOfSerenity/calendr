@@ -102,13 +102,29 @@ HomeworkService = (Restangular, $mdToast) ->
   @
 
 SubjectService = (Restangular) ->
+  @subjects = []
+  @initialized = false
+
   subject = Restangular.all('subject')
 
-  @list = ->
-    return subject.getList()
+  # Data population
+  @init = =>
+    subject.getList().then (subjects) =>
+      angular.forEach subjects, (s) =>
+        @subjects.push(s)
+      @initialized = true
 
-  @add = (params) ->
+  @add = (homework) =>
+    Restangular.one('subject', homework.id).get()
+      .then (obj) =>
+        @subjects.push(obj)
+
+  @post = (params) ->
     return subject.post(params)
+
+  @clear = =>
+    @subjects = []
+    @initialized = false
 
   @
 

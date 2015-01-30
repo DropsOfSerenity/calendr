@@ -1,4 +1,5 @@
-BaseCtrl = ($scope, $mdDialog, Auth, PusherService, HomeworkService) ->
+BaseCtrl = ($scope, $mdDialog, Auth,
+            PusherService, SubjectService, HomeworkService) ->
   # authentication stuff here
   @showLoginAttempt = () ->
     $mdDialog.show({
@@ -37,14 +38,17 @@ BaseCtrl = ($scope, $mdDialog, Auth, PusherService, HomeworkService) ->
 
   $scope.$on 'devise:login', (event, currentUser) ->
     HomeworkService.init()
+    SubjectService.init()
     PusherService.subscribe()
 
   $scope.$on 'devise:new-registration', (event, user) ->
     HomeworkService.init()
+    SubjectService.init()
     PusherService.subscribe()
 
   $scope.$on 'devise:logout', (event, currentUser) ->
     HomeworkService.clear()
+    SubjectService.clear()
     PusherService.unsubscribe()
 
 
@@ -60,10 +64,7 @@ AllCtrl = (HomeworkService) ->
   @
 
 HomeworkAddCtrl = ($scope, SubjectService, HomeworkService, $state) ->
-  @subjects = []
-  SubjectService.list().then (subject_list) =>
-      angular.forEach subject_list, (s) =>
-        @subjects.push(s)
+  @subjects = SubjectService.subjects
 
   @newSubject = {color: '#454987'}
   @createNewSubject = false
@@ -74,7 +75,7 @@ HomeworkAddCtrl = ($scope, SubjectService, HomeworkService, $state) ->
 
 
   @addSubject = () =>
-    SubjectService.add(@newSubject)
+    SubjectService.post(@newSubject)
       .then (data) =>
         @subjects.push data
         @createNewSubject = false
