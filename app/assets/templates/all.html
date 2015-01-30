@@ -2,7 +2,7 @@
   <md-button class="md-button-toggle md-primary"
     ng-click="all.upcomingOpen = !all.upcomingOpen"
     flex layout="row">
-    Upcoming
+    <i class="fa fa-bookmark-o"></i> Upcoming
     <span aria-hidden="true" class="md-toggle-icon"
       ng-class="{'toggled' : all.upcomingOpen}">
     </span>
@@ -33,14 +33,13 @@
           Due {{ homework.timeUntilDue() }}
         </span>
       </md-item-content>
-      <md-divider></md-divider>
     </md-item>
   </md-list>
 
   <md-button class="md-button-toggle md-warn"
     ng-click="all.pastDueOpen = !all.pastDueOpen"
     flex layout="row">
-    Past Due
+    <i class="fa fa-clock-o"></i> Past Due
     <span aria-hidden="true" class="md-toggle-icon"
       ng-class="{'toggled' : all.pastDueOpen}">
     </span>
@@ -77,7 +76,7 @@
   <md-button class="md-button-toggle md-accent"
     ng-click="all.completedOpen = !all.completedOpen"
     flex layout="row">
-    Completed
+    <i class="fa fa-check-circle-o"></i> Completed
     <span aria-hidden="true" class="md-toggle-icon"
       ng-class="{'toggled' : all.completedOpen}">
     </span>
