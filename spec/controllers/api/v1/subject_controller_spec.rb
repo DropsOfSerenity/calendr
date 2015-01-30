@@ -44,6 +44,8 @@ RSpec.describe Api::V1::SubjectController, :type => :controller do
       end
 
       it "should create a subject" do
+        allow(Pusher).to receive(:trigger).and_return(true)
+
         post :create, format: :json, subject: {name: "Math", color: "#cccccc"}
 
         expect(response.status).to be 201
