@@ -7,4 +7,8 @@ class ApplicationController < ActionController::Base
 
   def index
   end
+
+  def trigger_user_pusher_action(action, id)
+      Pusher.trigger("private-calendr-#{current_user.id}", action, {id: id})
+  end
 end

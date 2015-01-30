@@ -1,4 +1,4 @@
-PusherService = ($pusher, Auth) ->
+PusherService = ($pusher, Auth, HomeworkService) ->
   @channel = null
   pusher = $pusher(client)
 
@@ -14,10 +14,17 @@ PusherService = ($pusher, Auth) ->
   pusher.connection.bind 'subscription_error', ->
     console.log 'Pusher Couldn\'t subscribe'
 
+  # subscribe to the channel and bind to all necessary events
   @subscribe = =>
     Auth.currentUser()
       .then (user) =>
-        @channel = pusher.subscribe("private-homework-#{user.id}")
+        @channel = pusher.subscribe("private-calendr-#{user.id}")
+        @channel.bind 'homework-create', (data) ->
+          console.log 'new homework has been created server side...'
+          HomeworkService.add(data)
+        @channel.bind 'homework-update', (data) ->
+          console.log 'existing homework has been updated server side...'
+          HomeworkService.update(data)
 
   @unsubscribe = =>
     pusher.unsubscribe(@channel.name)

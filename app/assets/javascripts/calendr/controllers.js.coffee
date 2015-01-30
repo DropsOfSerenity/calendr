@@ -38,24 +38,10 @@ BaseCtrl = ($scope, $mdDialog, Auth, PusherService, HomeworkService) ->
   $scope.$on 'devise:login', (event, currentUser) ->
     HomeworkService.init()
     PusherService.subscribe()
-      .then ->
-        PusherService.channel.bind 'create', (data) ->
-          console.log 'new homework has been created server side...'
-          HomeworkService.add(data)
-        PusherService.channel.bind 'update', (data) ->
-          console.log 'existing homework has been updated server side...'
-          HomeworkService.update(data)
 
   $scope.$on 'devise:new-registration', (event, user) ->
     HomeworkService.init()
     PusherService.subscribe()
-      .then ->
-        PusherService.channel.bind 'create', (data) ->
-          console.log 'new homework has been created server side...'
-          HomeworkService.add(data)
-        PusherService.channel.bind 'update', (data) ->
-          console.log 'existing homework has been updated server side...'
-          HomeworkService.update(data)
 
   $scope.$on 'devise:logout', (event, currentUser) ->
     HomeworkService.clear()

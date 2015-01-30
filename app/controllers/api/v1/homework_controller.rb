@@ -16,7 +16,7 @@ class Api::V1::HomeworkController < ApplicationController
   def create
     @homework = current_user.homeworks.new(homework_params)
     if @homework.save
-      trigger_user_pusher_action("create", @homework.id)
+      trigger_user_pusher_action("homework-create", @homework.id)
       respond_with :api, :v1, @homework
     else
       respond_with @homework
@@ -26,7 +26,7 @@ class Api::V1::HomeworkController < ApplicationController
   def update
     @homework = Homework.find(params[:id])
     if @homework.update_attributes(homework_params) and !homework_params.empty?
-      trigger_user_pusher_action("update", @homework.id)
+      trigger_user_pusher_action("homework-update", @homework.id)
       respond_with @homework
     else
       render nothing: true, status: :bad_request
@@ -37,10 +37,6 @@ class Api::V1::HomeworkController < ApplicationController
 
   def logged_in
     render json: 'Bad credentials', status: 401 unless current_user
-  end
-
-  def trigger_user_pusher_action(action, id)
-      Pusher.trigger("private-homework-#{current_user.id}", action, {id: id})
   end
 
   def homework_params

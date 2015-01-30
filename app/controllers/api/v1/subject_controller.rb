@@ -14,6 +14,7 @@ class Api::V1::SubjectController < ApplicationController
   def create
     subject = current_user.subjects.new(subject_params)
     if subject.save
+      trigger_user_pusher_action("subject-create", subject.id)
       respond_with :api, :v1, subject
     else
       respond_with subject
