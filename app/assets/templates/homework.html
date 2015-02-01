@@ -68,15 +68,19 @@
     <h1 class="md-toolbar-tools">Select a Subject</h1>
   </md-toolbar>
   <md-content md-scroll-y>
-    <div layout="row">
-      <md-input-container>
-        <label>New Subject Name</label>
-        <input ng-model="hw.newSubject.name">
-      </md-input-container>
-      <input type="text" spectrum-color-picker ng-model="hw.newSubject.color">
-    </div>
-    <md-button href="" class="md-accent" ng-click="hw.addSubject()">Add
-    </md-button>
+    <form name="createSubjectForm" novalidate>
+      <div layout="row">
+        <md-input-container> 
+          <label>New Subject Name</label>
+          <input clear-server-error name="name" ng-model="hw.newSubject.name">
+          <div ng-messages="createSubjectForm.name.$error">
+            <div ng-message="server">{{ subject_errors.name }}</div>
+          </div>
+        </md-input-container>
+        <input name="color" type="text" spectrum-color-picker ng-model="hw.newSubject.color">
+      </div>
+      <md-button ng-disabled="!createSubjectForm.$valid" class="md-accent" ng-click="hw.addSubject()">Add</md-button>
+    </form>
     <div layout="column">
       <md-list ng-if="hw.subjects.subjects.length > 0">
         <md-item ng-repeat="subject in hw.subjects.subjects"

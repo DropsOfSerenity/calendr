@@ -64,9 +64,10 @@ AllCtrl = (HomeworkService) ->
   @
 
 HomeworkAddCtrl = ($scope, $mdSidenav, SubjectService, HomeworkService, $state) ->
+  $scope.subject_errors = {}
   @subjects = SubjectService
 
-  @newSubject = {color: '#454987'}
+  @newSubject = {color: '#ffebcd'}
 
   @currentSubject = null
   @selectSubject = (subject) =>
@@ -77,7 +78,13 @@ HomeworkAddCtrl = ($scope, $mdSidenav, SubjectService, HomeworkService, $state) 
   @addSubject = () =>
     SubjectService.post(@newSubject)
       .then (data) =>
-        @newSubject = {color: '#454987'}
+        @newSubject = {color: '#ffebcd'}
+      , (response) ->
+        console.log response.data
+        angular.forEach response.data.errors, (e, field) ->
+          $scope.createSubjectForm[field].$setValidity('server', false)
+          $scope.subject_errors[field] = e.join(', ')
+          console.log $scope.subject_errors
 
   @form = {}
   $scope.errors = {}
