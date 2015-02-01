@@ -1,4 +1,4 @@
-PusherService = ($pusher, Auth, HomeworkService) ->
+PusherService = ($pusher, Auth, HomeworkService, SubjectService) ->
   @channel = null
   pusher = $pusher(client)
 
@@ -25,6 +25,8 @@ PusherService = ($pusher, Auth, HomeworkService) ->
         @channel.bind 'homework-update', (data) ->
           console.log 'existing homework has been updated server side...'
           HomeworkService.update(data)
+        @channel.bind 'subject-create', (data) ->
+          SubjectService.add(data)
 
   @unsubscribe = =>
     pusher.unsubscribe(@channel.name)
@@ -117,7 +119,7 @@ SubjectService = (Restangular) ->
   @add = (homework) =>
     Restangular.one('subject', homework.id).get()
       .then (obj) =>
-        @subjects.push(obj)
+        @subjects.unshift(obj)
 
   @post = (params) ->
     return subject.post(params)

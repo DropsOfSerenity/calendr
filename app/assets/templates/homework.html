@@ -1,76 +1,102 @@
 <md-content layout="column" class="md-padding homework-confirm">
-  <form name="addHomeworkForm" novalidate ng-submit="hw.create()">
-    <div layout="column">
-      <md-input-container>
-        <label>Title</label>
-        <input md-maxlength="50" required name="title" ng-model="hw.form.title">
-        <div ng-messages="addHomeworkForm.title.$error">
-          <div ng-message="required">This is required.</div>
-          <div ng-message="md-maxlength">
-            The title has to be less than 50 characters long.
-          </div>
-        </div>
-      </md-input-container>
-      <md-input-container>
-        <label>Description</label>
-        <textarea md-maxlength="500" required name="description" ng-model="hw.form.description">
-        </textarea>
-        <div ng-messages="addHomeworkForm.description.$error">
-          <div ng-message="required">This is required.</div>
-          <div ng-message="server">{{ errors.description }}</div>
-        </div>
-      </md-input-container>
-      <md-input-container>
-        <input type="text" name="due_date"
-        clear-server-error
-        required
-        pick-a-date
-        ng-model="hw.form.due_date"
-        placeholder="Due Date"/>
-        <div ng-messages="addHomeworkForm.due_date.$error">
-          <div ng-message="required">This is required.</div>
-          <div ng-message="server">{{ errors.due_date }}</div>
-        </div>
-      </md-input-container>
-      <div class="subject-choose" layout="row" layout-wrap>
-        <md-button ng-repeat="subject in hw.subjects"
-          ng-click="hw.selectSubject(subject)"
-          ng-class="{ 'md-raised': subject == hw.currentSubject }"
-          href=""
-          style="margin: 3px 3px;border-left: {{ subject.color}} solid 4px;
-          text-transform: none;">
-          {{ subject.name }}
-        </md-button>
-        <md-button ng-show="!hw.createNewSubject"
-          href=""
-          class="md-primary md-hue-2"
-          aria-label="add"
-          ng-click="hw.createNewSubject = true"
-          style="margin: 3px 3px; width: 36px;">
-          <i class="fa fa-plus"></i>
-        </md-button>
-      </div>
-      <div ng-if="hw.createNewSubject">
-        <div layout="row">
+    <md-content class="md-padding">
+      <form name="addHomeworkForm" novalidate ng-submit="hw.create()">
+        <div layout="column">
           <md-input-container>
-            <label>New Subject Name</label>
-            <input ng-model="hw.newSubject.name">
+            <label>Title</label>
+            <input md-maxlength="50" required name="title" ng-model="hw.form.title">
+            <div ng-messages="addHomeworkForm.title.$error">
+              <div ng-message="required">This is required.</div>
+              <div ng-message="md-maxlength">
+                The title has to be less than 50 characters long.
+              </div>
+            </div>
           </md-input-container>
-          <input type="text" spectrum-color-picker ng-model="hw.newSubject.color">
+          <md-input-container>
+            <label>Description</label>
+            <textarea md-maxlength="500" required name="description" ng-model="hw.form.description">
+            </textarea>
+            <div ng-messages="addHomeworkForm.description.$error">
+              <div ng-message="required">This is required.</div>
+              <div ng-message="server">{{ errors.description }}</div>
+            </div>
+          </md-input-container>
+          <md-input-container>
+            <input type="text" name="due_date"
+            clear-server-error
+            required
+            pick-a-date
+            ng-model="hw.form.due_date"
+            placeholder="Due Date"/>
+            <div ng-messages="addHomeworkForm.due_date.$error">
+              <div ng-message="required">This is required.</div>
+              <div ng-message="server">{{ errors.due_date }}</div>
+            </div>
+          </md-input-container>
+          <md-item class="cursor-pointer" ng-click="hw.toggleSubjectSelector()" ng-if="!!hw.currentSubject">
+            <md-item-content>
+              <div class="md-tile-left" style="padding: 5px;">
+                <span class="subject-color" style="background-color: {{ hw.currentSubject.color }}"></span>
+              </div>
+              <div class="md-tile-content">
+                <p>{{ hw.currentSubject.name }}</p>
+              </div>
+            </md-item-content>
+          </md-item>
+          <md-item class="cursor-pointer" ng-click="hw.toggleSubjectSelector()" ng-if="!hw.currentSubject">
+            <md-item-content>
+              <div class="md-tile-left" style="padding: 5px;">
+                <span class="subject-color" style="background-color: black;"></span>
+              </div>
+              <div class="md-tile-content">
+                <p>No subject selected yet. Click me to select one.</p>
+              </div>
+            </md-item-content>
+          </md-item>
+          <small ng-show="!hw.currentSubject" style="padding: 5px;">Please select a subject</small>
         </div>
-        <md-button style="margin-top:-15px; display: inline-block;"
-          href="" class="md-accent" ng-click="hw.addSubject()">Add
-        </md-button>
-        <md-button style="margin-top:-15px; display: inline-block;"
-          href="" class="md-warn" ng-click="hw.createNewSubject = false">Cancel
-        </md-button>
-      </div>
-      <small ng-show="!hw.currentSubject" style="padding: 5px;">Please select a subject</small>
-    </div>
-    <div class="homework-confirm" layout="row" layout-align="center center">
-      <md-button class="md-raised md-primary" ng-disabled="!addHomeworkForm.$valid || !hw.currentSubject" type="submit">Create Homework</md-button>
-      <md-button class="md-raised md-warn" ui-sref="base.planner-tabs">Cancel</md-button>
-    </div>
-  </form>
+        <div layout="row">
+          <md-button class="md-primary" ng-disabled="!addHomeworkForm.$valid || !hw.currentSubject" type="submit">Create</md-button>
+          <md-button class="md-warn" ui-sref="base.planner-tabs">Cancel</md-button>
+        </div>
+      </form>
+    </md-content>
 </md-content>
 
+<md-sidenav md-component-id="right" class="md-whiteframe-z2 md-sidenav-right">
+  <md-toolbar>
+    <h1 class="md-toolbar-tools">Select a Subject</h1>
+  </md-toolbar>
+  <md-content md-scroll-y>
+    <div layout="row">
+      <md-input-container>
+        <label>New Subject Name</label>
+        <input ng-model="hw.newSubject.name">
+      </md-input-container>
+      <input type="text" spectrum-color-picker ng-model="hw.newSubject.color">
+    </div>
+    <md-button href="" class="md-accent" ng-click="hw.addSubject()">Add
+    </md-button>
+    <div layout="column">
+      <md-list ng-if="hw.subjects.subjects.length > 0">
+        <md-item ng-repeat="subject in hw.subjects.subjects"
+          ng-click="hw.selectSubject(subject)"
+          ng-class="{ 'selected': subject == hw.currentSubject }">
+          <md-divider ng-if="$first"></md-divider>
+          <md-item-content class="cursor-pointer">
+            <div class="md-tile-left" style="padding: 5px;">
+              <span class="subject-color" style="background-color: {{ subject.color }}"></span>
+            </div>
+            <div class="md-tile-content">
+              <p>{{ subject.name }}</p>
+            </div>
+          </md-item-content>
+          <md-divider></md-divider>
+        </md-item>
+      </md-list>
+      <p style="padding:5px;" ng-if="!hw.subjects.subjects.length">
+        You have no subjects yet, add one above
+      </p>
+    </div>
+  </md-content>
+</md-sidenav>

@@ -164,3 +164,28 @@ md-content {
     margin: 10px 0 !important;
   }
 }
+
+.homework-confirm {
+  .form-content {
+    max-width: 864px;
+    margin: auto;
+
+    md-toolbar {
+      border-radius: 5px 5px 0 0;
+    }
+  }
+}
+
+.subject-color {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+  &:hover {
+    background-color: #eee;
+  }
+}

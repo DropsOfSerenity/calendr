@@ -4,4 +4,6 @@ class Subject < ActiveRecord::Base
 
   validates :name, uniqueness: {scope: :user_id}, presence: true
   validates :color, presence: true
+
+  default_scope { order('created_at DESC') }
 end

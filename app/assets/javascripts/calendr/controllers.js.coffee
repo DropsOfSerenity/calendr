@@ -63,22 +63,20 @@ AllCtrl = (HomeworkService) ->
 
   @
 
-HomeworkAddCtrl = ($scope, SubjectService, HomeworkService, $state) ->
-  @subjects = SubjectService.subjects
+HomeworkAddCtrl = ($scope, $mdSidenav, SubjectService, HomeworkService, $state) ->
+  @subjects = SubjectService
 
   @newSubject = {color: '#454987'}
-  @createNewSubject = false
 
   @currentSubject = null
   @selectSubject = (subject) =>
+    $mdSidenav('right').toggle()
     @currentSubject = subject
 
 
   @addSubject = () =>
     SubjectService.post(@newSubject)
       .then (data) =>
-        @subjects.push data
-        @createNewSubject = false
         @newSubject = {color: '#454987'}
 
   @form = {}
@@ -94,6 +92,9 @@ HomeworkAddCtrl = ($scope, SubjectService, HomeworkService, $state) ->
           console.log e, field
           $scope.addHomeworkForm[field].$setValidity('server', false)
           $scope.errors[field] = e.join(', ')
+
+  @toggleSubjectSelector = ->
+    $mdSidenav('right').toggle()
 
   @
 
@@ -130,7 +131,6 @@ RegisterCtrl = ($scope, Auth, $mdDialog) ->
 # controller to provide actionables across all planner tabs
 PlannerCtrl = ($mdBottomSheet) ->
   @showBottomGrid = (homework) ->
-    console.log homework
     $mdBottomSheet.show {
       templateUrl: 'partials/_actionable-bottom-grid.html'
       controller: ($scope, $mdBottomSheet) ->
