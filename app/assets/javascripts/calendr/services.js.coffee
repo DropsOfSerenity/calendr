@@ -109,6 +109,10 @@ SubjectService = (Restangular) ->
 
   subject = Restangular.all('subject')
 
+  # subject domain logic
+  Restangular.extendModel 'subject', (model) ->
+    return _.extend model,
+
   # Data population
   @init = =>
     subject.getList().then (subjects) =>

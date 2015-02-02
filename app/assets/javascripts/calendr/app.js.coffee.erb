@@ -30,7 +30,8 @@ calendrConfig = (
       'hue-2': '600',
       'hue-3': 'A100'
     })
-    .accentColor('green');
+    .accentColor('green')
+
   $mdThemingProvider.theme('dark', 'default')
     .dark()
 
@@ -58,6 +59,7 @@ calendrConfig = (
         }
         "subject@base.planner-tabs": {
           templateUrl: 'subject.html'
+          controller: 'SubjectCtrl as sub'
         }
       }
 

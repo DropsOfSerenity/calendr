@@ -63,32 +63,16 @@ AllCtrl = (HomeworkService) ->
 
   @
 
+SubjectCtrl = (HomeworkService, SubjectService) ->
+  @homework = HomeworkService
+  @subject = SubjectService
+
+  @
+
 HomeworkAddCtrl = ($scope, $mdSidenav, SubjectService, HomeworkService, $state) ->
-  $scope.subject_errors = {}
-  @subjects = SubjectService
-
-  @newSubject = {color: '#ffebcd'}
-
-  @currentSubject = null
-  @selectSubject = (subject) =>
-    $mdSidenav('right').toggle()
-    @currentSubject = subject
-
-
-  @addSubject = () =>
-    SubjectService.post(@newSubject)
-      .then (data) =>
-        @newSubject = {color: '#ffebcd'}
-      , (response) ->
-        console.log response.data
-        angular.forEach response.data.errors, (e, field) ->
-          $scope.createSubjectForm[field].$setValidity('server', false)
-          $scope.subject_errors[field] = e.join(', ')
-          console.log $scope.subject_errors
-
-  @form = {}
+  # Homework form handling
   $scope.errors = {}
-
+  @form = {}
   @create = =>
     @form.subject_id = @currentSubject.id
     HomeworkService.post(@form)
@@ -99,6 +83,25 @@ HomeworkAddCtrl = ($scope, $mdSidenav, SubjectService, HomeworkService, $state) 
           console.log e, field
           $scope.addHomeworkForm[field].$setValidity('server', false)
           $scope.errors[field] = e.join(', ')
+
+  # Subject form handling
+  $scope.subject_errors = {}
+  @subjects = SubjectService
+  @newSubject = {color: '#ffebcd'}
+  @currentSubject = null
+  @addSubject = () =>
+    SubjectService.post(@newSubject)
+      .then (data) =>
+        @newSubject = {color: '#ffebcd'}
+      , (response) ->
+        console.log response.data
+        angular.forEach response.data.errors, (e, field) ->
+          $scope.createSubjectForm[field].$setValidity('server', false)
+          $scope.subject_errors[field] = e.join(', ')
+
+  @selectSubject = (subject) =>
+    $mdSidenav('right').toggle()
+    @currentSubject = subject
 
   @toggleSubjectSelector = ->
     $mdSidenav('right').toggle()
@@ -157,6 +160,7 @@ angular
   .module 'calendr'
   .controller 'PlannerCtrl', PlannerCtrl
   .controller 'AllCtrl', AllCtrl
+  .controller 'SubjectCtrl', SubjectCtrl
   .controller 'BaseCtrl', BaseCtrl
   .controller 'HomeworkAddCtrl', HomeworkAddCtrl
   .controller 'LoginCtrl', LoginCtrl

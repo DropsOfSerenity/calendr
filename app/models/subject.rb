@@ -1,6 +1,6 @@
 class Subject < ActiveRecord::Base
   belongs_to :user
-  has_many :homeworks
+  has_many :homeworks, dependent: :destroy
 
   validates :name, uniqueness: {scope: :user_id}, presence: true
   validates :color, presence: true

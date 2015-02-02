@@ -1,4 +1,12 @@
-<md-content md-theme="default">
+<div layout="column" class="all-list">
+  <md-button class="md-button-toggle md-primary"
+    ng-repeat="subject in sub.subject.subjects"
+    flex layout="row">
+    {{ subject.name }}
+    <span aria-hidden="true" class="md-toggle-icon"
+      ng-class="{'toggled' : all.upcomingOpen}">
+    </span>
+  </md-button>
   <md-list class="homework-list">
   </md-list>
-</md-content>
+</div>
