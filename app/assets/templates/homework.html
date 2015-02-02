@@ -1,7 +1,8 @@
 <md-content layout="column" class="md-padding homework-confirm">
     <md-content class="md-padding">
       <form name="addHomeworkForm" novalidate ng-submit="hw.create()">
-        <div layout="column">
+        <div layout="column" class="homework-form">
+          <h3>Create Homework</h3>
           <md-input-container>
             <label>Title</label>
             <input md-maxlength="50" required name="title" ng-model="hw.form.title">
@@ -53,11 +54,12 @@
               </div>
             </md-item-content>
           </md-item>
+          <md-divider></md-divider>
           <small ng-show="!hw.currentSubject" style="padding: 5px;">Please select a subject</small>
-        </div>
         <div layout="row">
           <md-button class="md-primary" ng-disabled="!addHomeworkForm.$valid || !hw.currentSubject" type="submit">Create</md-button>
           <md-button class="md-warn" ui-sref="base.planner-tabs">Cancel</md-button>
+        </div>
         </div>
       </form>
     </md-content>

@@ -154,7 +154,6 @@ md-content {
 .homework-confirm {
   .md-button {
     display: block;
-    margin: 1em;
     line-height: 25px;
   }
   .subject-choose {
@@ -164,16 +163,9 @@ md-content {
     margin: 10px 0 !important;
   }
 }
-
-.homework-confirm {
-  .form-content {
-    max-width: 864px;
-    margin: auto;
-
-    md-toolbar {
-      border-radius: 5px 5px 0 0;
-    }
-  }
+.homework-form {
+  max-width: 640px;
+  margin: 0 auto;
 }
 
 .subject-color {
