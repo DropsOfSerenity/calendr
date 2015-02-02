@@ -43,7 +43,10 @@ HomeworkService = (Restangular, $mdToast) ->
   Restangular.extendModel 'homework', (model) ->
     return _.extend model,
       timeUntilDue: () ->
-        return moment(@due_date).from(moment().startOf('day'))
+        if moment(@due_date).isSame(moment().startOf('day'))
+          return "today"
+        else
+          return moment(@due_date).from(moment().startOf('day'))
 
   hw = Restangular.all('homework')
 
@@ -84,14 +87,18 @@ HomeworkService = (Restangular, $mdToast) ->
   # Collection
   @upcoming = =>
     upcoming = _.filter @homework, (homework) ->
-      return !homework.completed_at && moment(homework.due_date).isAfter(moment())
+      return !homework.completed_at && (
+        moment(homework.due_date).isAfter(moment()) ||
+        moment(homework.due_date).isSame(moment().startOf('day'))
+      )
     return upcoming.sort (a, b) ->
       return new Date(a.due_date) - new Date(b.due_date)
 
 
   @pastDue = =>
     past_due = _.filter @homework, (homework) ->
-      return !homework.completed_at && moment(homework.due_date).isBefore(moment())
+      return !homework.completed_at &&
+        moment(homework.due_date).isBefore(moment().startOf('day'))
     return past_due.sort (a, b) ->
       return new Date(b.due_date) - new Date(a.due_date)
 
