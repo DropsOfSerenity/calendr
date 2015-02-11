@@ -10,6 +10,9 @@
   </md-tab>
 </md-tabs>
 
+<md-button ng-if="data.selectedIndex === 0 && base.loggedIn()"
+  ui-sref="base.add-homework"
+  class="slide-from-right md-fab md-primary md-hue-3 md-fab-bottom-right">+</md-button>
 <md-content ng-show="data.selectedIndex === 0" md-scroll-y flex>
   <div ui-view="all"></div>
 </md-content>

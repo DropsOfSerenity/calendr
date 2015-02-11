@@ -185,6 +185,12 @@ md-content {
   }
 }
 
-.md-fab-bottom-right {
-  bottom: 80px !important;
+.slide-from-right.ng-enter {
+  -webkit-animation: fadeInRight 0.5s;
+  animation: fadeInRight 0.5s;
+}
+
+.slide-from-right.ng-leave {
+  -webkit-animation: fadeOutRight 0.5s;
+  animation: fadeOutRight 0.5s;
 }
