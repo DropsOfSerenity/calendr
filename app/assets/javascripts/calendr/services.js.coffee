@@ -57,6 +57,9 @@ HomeworkService = (Restangular, $mdToast) ->
         @homework.push(hw)
       @initialized = true
 
+  @is_initialized = =>
+    return @initialized
+
   @add = (homework) =>
     Restangular.one('homework', homework.id).get()
       .then (obj) =>
@@ -67,8 +70,7 @@ HomeworkService = (Restangular, $mdToast) ->
           .position("bottom right"))
 
   @update = (homework) =>
-    homeworkWithId = _.find @homework, (hw) =>
-      return hw.id == homework.id
+    homeworkWithId = @find(hw.id)
     Restangular.one('homework', homework.id).get()
       .then (obj) =>
         _.assign(homeworkWithId, obj)
@@ -83,6 +85,10 @@ HomeworkService = (Restangular, $mdToast) ->
   @clear = =>
     @homework = []
     @initialized = false
+
+  @find = (id) =>
+    return _.find @homework, (hw) =>
+      return hw.id == id
 
   # Collection
   @upcoming = =>

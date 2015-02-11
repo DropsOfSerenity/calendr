@@ -1,3 +1,6 @@
+*[layout-fill] {
+  height: 100%;
+}
 html { font-family: RobotoDraft, Roboto, 'Helvetica Neue', sans-serif; }
 html, body {
   height: 100%
@@ -48,8 +51,8 @@ md-content {
 }
 
 .main-ui.ng-enter {
-  -webkit-animation: fadeInDown 1s;
-  animation: fadeInDown 1s;
+  -webkit-animation: fadeIn 0.5s;
+  animation: fadeIn 0.5s;
   visibility: hidden;
 }
 .main-ui.ng-enter-active {
@@ -180,4 +183,8 @@ md-content {
   &:hover {
     background-color: #eee;
   }
+}
+
+.md-fab-bottom-right {
+  bottom: 80px !important;
 }

@@ -4,8 +4,6 @@ BaseCtrl = ($scope, $mdDialog, Auth,
   @showLoginAttempt = () ->
     $mdDialog.show({
       templateUrl: 'partials/_login_attempt.html'
-      clickOutsideToClose: false
-      escapeToClose: false
     })
 
   @showLogin = (ev) ->
@@ -108,6 +106,59 @@ HomeworkAddCtrl = ($scope, $mdSidenav, SubjectService, HomeworkService, $state) 
 
   @
 
+HomeworkEditCtrl = ($scope, $state, $stateParams, $mdSidenav,
+                    HomeworkService, SubjectService) ->
+  watcher = $scope.$watch HomeworkService.is_initialized, =>
+    if HomeworkService.is_initialized
+      @homework = HomeworkService.find($stateParams.id)
+      @form =
+        title: @homework.title
+        description: @homework.description
+        due_date: @homework.due_date
+      @currentSubject = @homework.subject
+
+  @edit = =>
+    @homework.title = @form.title
+    @homework.description = @form.description
+    @homework.due_date = @form.due_date
+    @homework.subject = @currentSubject
+    @homework.subject_id = @currentSubject.id
+    @homework.put()
+      .then ->
+        $state.go('base.planner-tabs')
+      , (response) ->
+        angular.forEach response.data.errors, (e, field) ->
+          console.log e, field
+          $scope.addHomeworkForm[field].$setValidity('server', false)
+          $scope.errors[field] = e.join(', ')
+
+
+      watcher()
+
+  # Subject form handling
+  $scope.subject_errors = {}
+  @subjects = SubjectService
+  @newSubject = {color: '#ffebcd'}
+  @currentSubject = null
+  @addSubject = () =>
+    SubjectService.post(@newSubject)
+      .then (data) =>
+        @newSubject = {color: '#ffebcd'}
+      , (response) ->
+        console.log response.data
+        angular.forEach response.data.errors, (e, field) ->
+          $scope.createSubjectForm[field].$setValidity('server', false)
+          $scope.subject_errors[field] = e.join(', ')
+
+  @selectSubject = (subject) =>
+    $mdSidenav('right').toggle()
+    @currentSubject = subject
+
+  @toggleSubjectSelector = ->
+    $mdSidenav('right').toggle()
+
+  @
+
 LoginCtrl = ($scope, Auth, $mdDialog, $state) ->
   $scope.login = {}
   $scope.submitting = false
@@ -139,18 +190,21 @@ RegisterCtrl = ($scope, Auth, $mdDialog) ->
           $scope.errors[field] = e.join(', ')
 
 # controller to provide actionables across all planner tabs
-PlannerCtrl = ($mdBottomSheet) ->
+PlannerCtrl = ($mdBottomSheet, $state) ->
   @showBottomGrid = (homework) ->
     $mdBottomSheet.show {
       templateUrl: 'partials/_actionable-bottom-grid.html'
       controller: ($scope, $mdBottomSheet) ->
         $scope.items = [
           { name: 'Complete', icon: 'check' },
+          { name: 'Edit', icon: 'edit' },
         ]
         $scope.listItemClick = ($index) =>
           if $scope.items[$index].name == 'Complete'
             homework.completed_at = new Date()
             homework.put()
+          if $scope.items[$index].name == 'Edit'
+            $state.go('base.edit-homework', {id: homework.id})
 
           $mdBottomSheet.hide()
     }
@@ -163,5 +217,6 @@ angular
   .controller 'SubjectCtrl', SubjectCtrl
   .controller 'BaseCtrl', BaseCtrl
   .controller 'HomeworkAddCtrl', HomeworkAddCtrl
+  .controller 'HomeworkEditCtrl', HomeworkEditCtrl
   .controller 'LoginCtrl', LoginCtrl
   .controller 'RegisterCtrl', RegisterCtrl

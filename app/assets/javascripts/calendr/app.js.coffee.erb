@@ -68,6 +68,11 @@ calendrConfig = (
       templateUrl: 'homework.html'
       controller: 'HomeworkAddCtrl as hw'
 
+    .state 'base.edit-homework',
+      url: 'homework/{id:int}/edit'
+      templateUrl: 'homework-edit.html'
+      controller: 'HomeworkEditCtrl as hwe'
+
   $urlRouterProvider.otherwise '/planner'
 
   # enable HTML5 Mode for SEO
