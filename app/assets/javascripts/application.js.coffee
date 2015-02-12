@@ -14,7 +14,6 @@
 #= require angular-messages
 #= require pickadate/picker
 #= require pickadate/picker.date
-#= require fastclick
 #= require lodash
 #= require spectrum
 #= require restangular

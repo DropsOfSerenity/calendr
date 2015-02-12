@@ -1,6 +1,4 @@
 calendrRun = (RAILS_ENV) ->
-  FastClick.attach(document.body)
-
   <% if defined?(PusherFake) %>
   window.client = <%= PusherFake.javascript %>
   <% else %>
