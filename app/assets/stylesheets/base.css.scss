@@ -7,7 +7,7 @@ body {
   height: 100%;
   width: 100%;
   overflow: hidden;
-  max-width: 100%; 
+  max-width: 100%;
   max-height: 100%;
 }
 label {
@@ -38,13 +38,6 @@ md-content {
   &.md-padding {
     padding: 8px;
   }
-}
-
-.schedulr-tabs .md-header .md-ripple {
-  border-color: #FFFF8D !important;
-}
-.schedulr-tabs md-tabs-ink-bar {
-  background-color: #FFFF8D !important;
 }
 
 .main-ui.ng-enter {
